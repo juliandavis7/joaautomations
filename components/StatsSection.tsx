@@ -34,7 +34,7 @@ const TESTIMONIALS = [
 
 export default function StatsSection() {
   return (
-    <section id="results" style={{ background: '#fff', padding: '96px 40px', borderTop: '1px solid #E8ECF0' }}>
+    <section id="results" className="px-5 py-16 sm:px-8 md:px-10 md:py-24" style={{ background: '#fff', borderTop: '1px solid #E8ECF0' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 60 }}>
           <div style={{
@@ -44,20 +44,20 @@ export default function StatsSection() {
             Results
           </div>
           <h2 style={{
-            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 38, fontWeight: 800,
+            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 'clamp(28px, 6vw, 38px)', fontWeight: 800,
             color: '#0D1F35', lineHeight: 1.15, letterSpacing: '-0.02em',
           }}>
             The numbers speak for themselves
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24, marginBottom: 64 }}>
+        <div className="mb-16 grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
           {STATS.map((s, i) => (
             <div key={i} style={{
               background: '#F4F6F8', borderRadius: 10, padding: '28px 24px',
               border: '1px solid #E8ECF0', textAlign: 'center',
             }}>
-              <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 44, fontWeight: 800, color: '#0D1F35', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 8 }}>{s.value}</div>
+              <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 'clamp(32px, 8vw, 44px)', fontWeight: 800, color: '#0D1F35', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 8 }}>{s.value}</div>
               <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500, color: '#0D1F35', marginBottom: 4 }}>{s.label}</div>
               <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: '#533AFD', fontWeight: 500 }}>{s.delta}</div>
             </div>

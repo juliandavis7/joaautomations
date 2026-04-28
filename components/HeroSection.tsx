@@ -17,10 +17,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen overflow-hidden bg-[#061B31]"
-      style={{
-        padding: '120px 40px 80px',
-      }}
+      className="relative min-h-screen overflow-hidden bg-[#061B31] px-5 pt-[120px] pb-20 sm:px-10"
     >
       {/* Subtle dot grid */}
       <div
@@ -46,7 +43,7 @@ export default function HeroSection() {
       <div
         className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center justify-center text-center lg:min-h-[calc(100vh-200px)]"
       >
-        <div className="max-w-2xl">
+        <div className="max-w-6xl">
           {/* Headline */}
           <h1
             style={{
@@ -60,8 +57,8 @@ export default function HeroSection() {
               marginBottom: 24,
             }}
           >
-            We automate the busywork.{` `}
-            <span style={{ color: '#533AFD' }}>You focus on growth.</span>
+            <span style={{ display: 'block', color: '#fff' }}>We automate the busywork.</span>
+            <span style={{ display: 'block', color: '#533AFD', marginTop: '0.04em' }}>You focus on growth.</span>
           </h1>
 
           {/* Subhead */}
@@ -79,7 +76,7 @@ export default function HeroSection() {
               marginBottom: 40,
             }}
           >
-            Custom AI workflows for small businesses, built, tested, and maintained by our team.
+            Custom AI workflows for small businesses: built, tested, and maintained by our team.
             Live in under a week.
           </p>
 
@@ -152,8 +149,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Trust line — centered horizontally, anchored ~¾ down viewport (not chained to headline cluster) */}
-      <div className="absolute left-1/2 top-[75vh] z-10 w-full max-w-4xl -translate-x-1/2 -translate-y-1/2 px-4">
+      {/* Trust line — in-flow on mobile (under CTAs), absolute ~¾ viewport on lg+ */}
+      <div className="relative z-10 mx-auto mt-12 w-full max-w-4xl px-4 lg:absolute lg:left-1/2 lg:top-[75vh] lg:mt-0 lg:-translate-x-1/2 lg:-translate-y-1/2">
         <div
           style={{
             ...animStyle(320),

@@ -55,7 +55,7 @@ function ServiceCard({ eyebrow, title, body, Icon }: { eyebrow: string; title: s
 
 export default function ServicesSection() {
   return (
-    <section id="services" style={{ background: '#F4F6F8', padding: '96px 40px' }}>
+    <section id="services" className="px-5 py-16 sm:px-8 md:px-10 md:py-24" style={{ background: '#F4F6F8' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 56 }}>
           <div style={{
@@ -65,7 +65,7 @@ export default function ServicesSection() {
             What we do
           </div>
           <h2 style={{
-            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 38, fontWeight: 800,
+            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 'clamp(28px, 6vw, 38px)', fontWeight: 800,
             color: '#0D1F35', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: 16,
           }}>
             Everything automated. Nothing missed.
@@ -74,7 +74,7 @@ export default function ServicesSection() {
             We build and maintain the workflows so your team can focus on the work that actually matters.
           </p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s) => <ServiceCard key={s.eyebrow} {...s} />)}
         </div>
       </div>
