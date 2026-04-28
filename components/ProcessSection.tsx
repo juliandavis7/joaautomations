@@ -10,7 +10,7 @@ const STEPS = [
 
 export default function ProcessSection() {
   return (
-    <section id="process" style={{ background: '#061B31', padding: '96px 40px', position: 'relative', overflow: 'hidden' }}>
+    <section id="process" className="px-5 py-16 sm:px-8 md:px-10 md:py-24" style={{ background: '#061B31', position: 'relative', overflow: 'hidden' }}>
       {/* Subtle line texture */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
@@ -26,7 +26,7 @@ export default function ProcessSection() {
             How it works
           </div>
           <h2 style={{
-            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 38, fontWeight: 800,
+            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 'clamp(28px, 6vw, 38px)', fontWeight: 800,
             color: '#fff', lineHeight: 1.15, letterSpacing: '-0.02em',
           }}>
             Live in under a week

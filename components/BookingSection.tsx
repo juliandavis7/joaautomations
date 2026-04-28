@@ -16,7 +16,7 @@ export default function BookingSection() {
   }, [])
 
   return (
-    <section id="booking" style={{ background: '#F4F6F8', padding: '96px 40px', borderTop: '1px solid #E8ECF0' }}>
+    <section id="booking" className="px-5 py-16 sm:px-8 md:px-10 md:py-24" style={{ background: '#F4F6F8', borderTop: '1px solid #E8ECF0' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ textAlign: 'center', marginBottom: 56 }}>
           <div style={{
@@ -26,7 +26,7 @@ export default function BookingSection() {
             Get started
           </div>
           <h2 style={{
-            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 38, fontWeight: 800,
+            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 'clamp(28px, 6vw, 38px)', fontWeight: 800,
             color: '#0D1F35', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: 14,
           }}>
             Book a free strategy call
@@ -39,7 +39,7 @@ export default function BookingSection() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32, alignItems: 'start' }}>
+        <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-2 lg:gap-8">
           {/* GHL Booking calendar */}
           <div style={{
             background: '#fff', border: '1px solid #E8ECF0', borderRadius: 12,
@@ -47,7 +47,8 @@ export default function BookingSection() {
           }}>
             <iframe
               src="https://api.leadconnectorhq.com/widget/booking/vSeadLyYXgNRD77GYwdo"
-              style={{ width: '100%', minHeight: 700, border: 'none', display: 'block' }}
+              className="block w-full min-h-[600px] lg:min-h-[700px]"
+              style={{ border: 'none' }}
               id="vSeadLyYXgNRD77GYwdo_booking"
               title="Book a strategy call"
             />
@@ -60,7 +61,8 @@ export default function BookingSection() {
           }}>
             <iframe
               src="https://api.leadconnectorhq.com/widget/form/DYmesREeqmP3gHmOdlaK"
-              style={{ width: '100%', minHeight: 700, border: 'none', display: 'block' }}
+              className="block w-full min-h-[600px] lg:min-h-[700px]"
+              style={{ border: 'none' }}
               id="inline-DYmesREeqmP3gHmOdlaK"
               title="Contact form"
             />
