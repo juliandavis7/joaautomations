@@ -5,6 +5,33 @@ const STATS = [
   { value: '50+', label: 'Workflows built & maintained', delta: 'across SMB clients' },
 ]
 
+const TESTIMONIALS = [
+  {
+    quote:
+      'Before this was in place, every signed lease meant 20 minutes of busywork. Updating the CRM, refreshing the installer sheet, sending the welcome packet and payment links, all by hand. Now the second a lease gets signed, all of that fires off on its own. We get hours back every week.',
+    name: 'Dan Rowan',
+    title: 'Owner',
+    company: 'Best Interlocks of California',
+    imageSrc: '/logos/best-interlocks.png',
+  },
+  {
+    quote:
+      "I was missing calls every summer weekend. Tourists would hit voicemail and rent from the shop down the boardwalk. Now the AI receptionist answers every call and books rentals straight into my calendar. Weekend revenue is up and I'm not the bottleneck anymore.",
+    name: 'Karl Watson',
+    title: 'Owner',
+    company: 'Humble Bike Rentals',
+    imageSrc: '/logos/humble-bike-rentals.png',
+  },
+  {
+    quote:
+      "Our past guests are the most valuable people in our database, but we never had the bandwidth to stay in touch the right way. Now they get messages that actually reference their last stay, the property, even the dates they were there. We've rebooked guests who hadn't traveled with us in over two years.",
+    name: 'Jeffrey Kippax',
+    title: 'VP of Sales & Ops',
+    company: 'Affluent Vacays',
+    imageSrc: '/logos/affluent-vacays.png',
+  },
+]
+
 export default function StatsSection() {
   return (
     <section id="results" style={{ background: '#fff', padding: '96px 40px', borderTop: '1px solid #E8ECF0' }}>
@@ -37,29 +64,76 @@ export default function StatsSection() {
           ))}
         </div>
 
-        {/* Testimonial */}
         <div style={{
-          background: '#f3f2ff', border: '1px solid #e8e5ff', borderRadius: 12,
-          padding: '36px 40px', maxWidth: 700, margin: '0 auto', textAlign: 'center',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: 20,
+          marginTop: 48,
+          marginBottom: 0,
         }}>
-          <p style={{
-            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 18, fontWeight: 600,
-            color: '#0D1F35', lineHeight: 1.5, marginBottom: 20, fontStyle: 'italic',
-          }}>
-            &ldquo;We went from manually entering 80+ leads a week to zero. JOA had the whole thing running in 4 days.&rdquo;
-          </p>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12 }}>
-            <div style={{
-              width: 36, height: 36, borderRadius: '50%', background: '#533AFD',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <span style={{ color: '#fff', fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 14, fontWeight: 700 }}>M</span>
+          {TESTIMONIALS.map((t) => (
+            <div
+              key={t.name + t.company}
+              style={{
+                background: '#F3F0FA',
+                border: '1px solid #E4E0F0',
+                borderRadius: 14,
+                padding: '32px 28px',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                height: '100%',
+              }}
+            >
+              <p style={{
+                fontFamily: "'Plus Jakarta Sans',sans-serif",
+                fontSize: 15,
+                fontWeight: 700,
+                fontStyle: 'italic',
+                color: '#0D1F35',
+                lineHeight: 1.55,
+                margin: '0 0 24px',
+                flex: 1,
+                textAlign: 'center',
+              }}>
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div
+                  style={{
+                    width: 60,
+                    height: 60,
+                    borderRadius: '50%',
+                    flexShrink: 0,
+                    border: '1px solid #E4E0F0',
+                    background: '#fff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: 6,
+                    boxSizing: 'border-box',
+                    overflow: 'hidden',
+                  }}
+                >
+                  <img
+                    src={t.imageSrc}
+                    alt={`${t.company} logo`}
+                    width={120}
+                    height={120}
+                    style={{ objectFit: 'contain', width: '100%', height: '100%' }}
+                  />
+                </div>
+                <div style={{ textAlign: 'left', minWidth: 0 }}>
+                  <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 15, fontWeight: 700, color: '#0D1F35' }}>
+                    {t.name}
+                  </div>
+                  <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: '#8896A8', lineHeight: 1.4 }}>
+                    {t.title}, {t.company}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div style={{ textAlign: 'left' }}>
-              <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 600, color: '#0D1F35' }}>Maria T.</div>
-              <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: '#8896A8' }}>Owner, Coastal Realty Group</div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

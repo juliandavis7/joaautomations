@@ -25,13 +25,13 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://joaautomations.com'),
-  title: 'JOA Automations — Custom AI workflows for small business',
+  title: 'JOA Automations: Custom AI workflows for small business',
   description:
-    'Boutique AI automation agency. Custom workflows and websites that handle your busywork — built, tested, maintained.',
+    'Boutique AI automation agency. Custom workflows and websites that handle your busywork, fully built, tested, and maintained.',
   openGraph: {
-    title: 'JOA Automations — Custom AI workflows for small business',
+    title: 'JOA Automations: Custom AI workflows for small business',
     description:
-      'Boutique AI automation agency. Custom workflows and websites that handle your busywork — built, tested, maintained.',
+      'Boutique AI automation agency. Custom workflows and websites that handle your busywork, fully built, tested, and maintained.',
     url: 'https://joaautomations.com',
     siteName: 'JOA Automations',
     images: [
@@ -46,9 +46,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'JOA Automations — Custom AI workflows for small business',
+    title: 'JOA Automations: Custom AI workflows for small business',
     description:
-      'Boutique AI automation agency. Custom workflows and websites that handle your busywork — built, tested, maintained.',
+      'Boutique AI automation agency. Custom workflows and websites that handle your busywork, fully built, tested, and maintained.',
     images: ['/og.png'],
   },
 }

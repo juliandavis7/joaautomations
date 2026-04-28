@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JOA Automations — Website UI Kit</title>
+<title>JOA Automations website UI Kit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
@@ -22,7 +22,7 @@
 <div id="root"></div>
 
 <script type="text/babel">
-// NavBar.jsx — JOA Automations
+// NavBar.jsx: JOA Automations
 // Sticky nav: transparent on hero, blurred dark on scroll
 
 const NavBar = ({ currentPage, onNav }) => {
@@ -94,7 +94,7 @@ const NavBar = ({ currentPage, onNav }) => {
 
 
 
-// HeroSection.jsx — JOA Automations
+// HeroSection.jsx: JOA Automations
 // Dark navy hero with headline, subhead, dual CTAs, and subtle node-graph pattern
 
 const HeroSection = ({ onNav }) => {
@@ -128,18 +128,6 @@ const HeroSection = ({ onNav }) => {
       }}/>
 
       <div style={{ maxWidth:760, textAlign:'center', position:'relative', zIndex:1 }}>
-        {/* Eyebrow */}
-        <div style={{ ...animStyle(0), display:'inline-flex', alignItems:'center', gap:8,
-          background:'rgba(83,58,253,0.15)', border:'1px solid rgba(83,58,253,0.3)',
-          borderRadius:999, padding:'5px 14px', marginBottom:28,
-        }}>
-          <span style={{ width:6, height:6, background:'#533AFD', borderRadius:'50%', display:'inline-block' }}/>
-          <span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:12, fontWeight:600,
-            letterSpacing:'0.08em', textTransform:'uppercase', color:'#9b8ffe' }}>
-            AI Workflow Automation
-          </span>
-        </div>
-
         {/* Headline */}
         <h1 style={{ ...animStyle(80),
           fontFamily:"'Plus Jakarta Sans',sans-serif", fontSize:58, fontWeight:800,
@@ -156,7 +144,7 @@ const HeroSection = ({ onNav }) => {
           color:'rgba(255,255,255,0.65)', lineHeight:1.65, marginBottom:40,
           maxWidth:560, margin:'0 auto 40px',
         }}>
-          Custom AI workflows for small businesses — built, tested, and maintained by our team. Live in under a week.
+          Custom AI workflows for small businesses, built, tested, and maintained by our team. Live in under a week.
         </p>
 
         {/* CTAs */}
@@ -184,7 +172,7 @@ const HeroSection = ({ onNav }) => {
 
         {/* Social proof */}
         <div style={{ ...animStyle(320), marginTop:56, display:'flex', alignItems:'center', justifyContent:'center', gap:24, flexWrap:'wrap' }}>
-          {['50+ workflows built', 'Live in 5–7 days', 'No long-term contracts'].map(t => (
+          {['50+ workflows built', 'Live in 5–7 days', 'ROI in the first 30 days'].map(t => (
             <div key={t} style={{ display:'flex', alignItems:'center', gap:6 }}>
               <span style={{ color:'#533AFD', fontSize:14 }}>✓</span>
               <span style={{ fontFamily:"'DM Sans',sans-serif", fontSize:13, color:'rgba(255,255,255,0.5)', fontWeight:400 }}>{t}</span>
@@ -198,16 +186,16 @@ const HeroSection = ({ onNav }) => {
 
 
 
-// ServicesSection.jsx — JOA Automations
+// ServicesSection.jsx: JOA Automations
 // Light section: 3-col feature cards
 
 const SERVICES = [
-  { eyebrow:'Lead Generation', title:'Capture & qualify leads automatically', body:'Every form submission, ad click, or chatbot interaction flows straight into your CRM — enriched, tagged, and ready for follow-up.' },
-  { eyebrow:'CRM Automation', title:'Your pipeline runs itself', body:'Auto-create contacts, assign owners, trigger follow-up sequences, and update deal stages — all without manual data entry.' },
+  { eyebrow:'Lead Generation', title:'Capture & qualify leads automatically', body:'Every form submission, ad click, or chatbot interaction flows straight into your CRM, enriched, tagged, and ready for follow-up.' },
+  { eyebrow:'CRM Automation', title:'Your pipeline runs itself', body:'Auto-create contacts, assign owners, trigger follow-up sequences, and update deal stages, all without manual data entry.' },
   { eyebrow:'Calendar & Scheduling', title:'Booking that actually books', body:'Embed your GHL calendar anywhere. Reminders, confirmations, and no-show follow-ups go out automatically.' },
-  { eyebrow:'Email & SMS Sequences', title:'Follow up while you sleep', body:'Multi-step nurture sequences triggered by behavior — new lead, no-show, closed deal — delivered at the right time.' },
+  { eyebrow:'Email & SMS Sequences', title:'Follow up while you sleep', body:'Multi-step nurture sequences triggered by behavior like a new lead, a no-show, or a closed deal, delivered at the right time.' },
   { eyebrow:'Reporting & Alerts', title:'Know what\'s working instantly', body:'Automated weekly reports and real-time Slack/email alerts when leads go cold, deals stall, or workflows fail.' },
-  { eyebrow:'Custom Integrations', title:'Connect any stack you use', body:'GHL, HubSpot, Zapier, Make, Airtable, Google Sheets, Slack — we wire it all together and maintain it for you.' },
+  { eyebrow:'Custom Integrations', title:'Connect any stack you use', body:'GHL, HubSpot, Zapier, Make, Airtable, Google Sheets, Slack: we wire it all together and maintain it for you.' },
 ];
 
 const ServiceCard = ({ eyebrow, title, body, index }) => {
@@ -262,15 +250,15 @@ const ServicesSection = () => (
 
 
 
-// ProcessSection.jsx — JOA Automations
+// ProcessSection.jsx: JOA Automations
 // Dark section: numbered "how it works" steps
 
 const STEPS = [
   { n:'01', title:'Discovery call', body:'30-minute call to map your current tools, biggest time drains, and automation opportunities. Free, no pressure.' },
-  { n:'02', title:'Custom workflow design', body:'We design your automation blueprint — triggers, actions, integrations — and walk you through it before we build anything.' },
+  { n:'02', title:'Custom workflow design', body:'We design your automation blueprint with triggers, actions, and integrations, then walk you through it before we build anything.' },
   { n:'03', title:'Build & test', body:'We build in your existing tools. Every workflow is tested end-to-end before going anywhere near live data.' },
   { n:'04', title:'Go live in days', body:'Most workflows go live within 5–7 business days. We monitor the first week to catch anything unexpected.' },
-  { n:'05', title:'Ongoing support', body:'Monthly check-ins, updates when your tools change, and a direct line to our team — not a ticket queue.' },
+  { n:'05', title:'Ongoing support', body:'Monthly check-ins, updates when your tools change, and a direct line to our team rather than a ticket queue.' },
 ];
 
 const ProcessSection = ({ onNav }) => (
@@ -335,7 +323,7 @@ const ProcessSection = ({ onNav }) => (
 
 
 
-// StatsSection.jsx — JOA Automations
+// StatsSection.jsx: JOA Automations
 // Light section: big stat numbers + brief testimonial
 
 const STATS = [
@@ -399,7 +387,7 @@ const StatsSection = () => (
 
 
 
-// BookingSection.jsx — JOA Automations
+// BookingSection.jsx: JOA Automations
 // GHL calendar embed placeholder + lead capture form
 
 const BookingSection = () => {
@@ -585,7 +573,7 @@ const BookingSection = () => {
 
 
 
-// Footer.jsx — JOA Automations
+// Footer.jsx: JOA Automations
 
 const Footer = ({ onNav }) => (
   <footer style={{ background:'#061B31', borderTop:'1px solid rgba(255,255,255,0.08)', padding:'56px 40px 32px' }}>

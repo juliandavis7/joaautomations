@@ -1,11 +1,11 @@
 'use client'
 
 const STEPS = [
-  { n: '01', title: 'Discovery call', body: '30-minute call to map your current tools, biggest time drains, and automation opportunities. Free, no pressure.' },
-  { n: '02', title: 'Custom workflow design', body: 'We design your automation blueprint — triggers, actions, integrations — and walk you through it before we build anything.' },
+  { n: '01', title: 'Strategy call', body: '30-minute call to map your current tools, biggest time drains, and automation opportunities. Free, no pressure.' },
+  { n: '02', title: 'Custom workflow design', body: 'We design your automation blueprint with triggers, actions, and integrations, then walk you through it before we build anything.' },
   { n: '03', title: 'Build & test', body: 'We build in your existing tools. Every workflow is tested end-to-end before going anywhere near live data.' },
   { n: '04', title: 'Go live in days', body: 'Most workflows go live within 5–7 business days. We monitor the first week to catch anything unexpected.' },
-  { n: '05', title: 'Ongoing support', body: 'Monthly check-ins, updates when your tools change, and a direct line to our team — not a ticket queue.' },
+  { n: '05', title: 'Ongoing support', body: 'Monthly check-ins, updates when your tools change, and a direct line to our team rather than a ticket queue.' },
 ]
 
 export default function ProcessSection() {
