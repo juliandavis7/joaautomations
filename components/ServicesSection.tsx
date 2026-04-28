@@ -1,17 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, type ComponentType, type SVGProps } from 'react'
+import { Filter, GitBranch, CalendarDays, Mail, PhoneCall, Plug } from 'lucide-react'
 
-const SERVICES = [
-  { eyebrow: 'Lead Generation', title: 'Capture & qualify leads automatically', body: 'Every form submission, ad click, or chatbot interaction flows straight into your CRM — enriched, tagged, and ready for follow-up.' },
-  { eyebrow: 'CRM Automation', title: 'Your pipeline runs itself', body: 'Auto-create contacts, assign owners, trigger follow-up sequences, and update deal stages — all without manual data entry.' },
-  { eyebrow: 'Calendar & Scheduling', title: 'Booking that actually books', body: 'Embed your GHL calendar anywhere. Reminders, confirmations, and no-show follow-ups go out automatically.' },
-  { eyebrow: 'Email & SMS Sequences', title: 'Follow up while you sleep', body: 'Multi-step nurture sequences triggered by behavior — new lead, no-show, closed deal — delivered at the right time.' },
-  { eyebrow: 'Reporting & Alerts', title: "Know what's working instantly", body: 'Automated weekly reports and real-time Slack/email alerts when leads go cold, deals stall, or workflows fail.' },
-  { eyebrow: 'Custom Integrations', title: 'Connect any stack you use', body: 'GHL, HubSpot, Zapier, Make, Airtable, Google Sheets, Slack — we wire it all together and maintain it for you.' },
+type IconType = ComponentType<SVGProps<SVGSVGElement>>
+
+const SERVICES: { eyebrow: string; title: string; body: string; Icon: IconType }[] = [
+  { eyebrow: 'AI Receptionist', title: 'Never miss a call again', body: '24/7 AI voice agent that answers, qualifies, books appointments, and routes urgent calls to your team. Sounds human, works while you sleep.', Icon: PhoneCall },
+  { eyebrow: 'Calendar & Scheduling', title: 'Booking that actually books', body: 'Embed your GHL calendar anywhere. Reminders, confirmations, and no-show follow-ups go out automatically.', Icon: CalendarDays },
+  { eyebrow: 'CRM Automation', title: 'Your pipeline runs itself', body: 'Auto-create contacts, assign owners, trigger follow-up sequences, and update deal stages, all without manual data entry.', Icon: GitBranch },
+  { eyebrow: 'Email & SMS Sequences', title: 'Follow up while you sleep', body: 'Multi-step nurture sequences triggered by behavior like a new lead, a no-show, or a closed deal, delivered at the right time.', Icon: Mail },
+  { eyebrow: 'Lead Generation', title: 'Capture & qualify leads automatically', body: 'Every form submission, ad click, or chatbot interaction flows straight into your CRM, enriched, tagged, and ready for follow-up.', Icon: Filter },
+  { eyebrow: 'Custom Integrations', title: 'Connect any stack you use', body: 'GHL, HubSpot, Zapier, Make, Airtable, Google Sheets, Slack: we wire it all together and maintain it for you.', Icon: Plug },
 ]
 
-function ServiceCard({ eyebrow, title, body }: { eyebrow: string; title: string; body: string }) {
+function ServiceCard({ eyebrow, title, body, Icon }: { eyebrow: string; title: string; body: string; Icon: IconType }) {
   const [hovered, setHovered] = useState(false)
   return (
     <div
@@ -29,7 +32,14 @@ function ServiceCard({ eyebrow, title, body }: { eyebrow: string; title: string;
         borderRadius: 10, marginBottom: 16, transition: 'background 220ms',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
-        <div style={{ width: 18, height: 18, background: hovered ? 'rgba(255,255,255,0.9)' : '#533AFD', borderRadius: 4, transition: 'background 220ms' }} />
+        <Icon
+          width={20}
+          height={20}
+          strokeWidth={2}
+          color={hovered ? '#ffffff' : '#533AFD'}
+          style={{ transition: 'color 220ms' }}
+          aria-hidden="true"
+        />
       </div>
       <div style={{
         fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600,
@@ -65,7 +75,7 @@ export default function ServicesSection() {
           </p>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 20 }}>
-          {SERVICES.map((s, i) => <ServiceCard key={i} {...s} />)}
+          {SERVICES.map((s) => <ServiceCard key={s.eyebrow} {...s} />)}
         </div>
       </div>
     </section>

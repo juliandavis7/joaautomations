@@ -10,14 +10,26 @@
   padding: 0;
 }
 
+/* Full-bleed canvas: default html background is white, so gutters show as white stripes
+   unless html is painted too and margins are cleared. */
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #061b31;
 }
 
 body {
-  background: #061B31;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100dvh;
+  min-height: 100vh;
+  background-color: #061b31;
+  overflow-x: clip;
 }
 
 /* Custom scrollbar */
