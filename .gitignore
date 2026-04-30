@@ -62,3 +62,6 @@ Desktop.ini
 
 # Local AI / assistant (optional local config)
 .claude
+
+# One-off Pillow venv used to rasterize icons (prefer sharp in /tmp)
+.venv-sign-icons/
