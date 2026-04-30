@@ -17,20 +17,20 @@ const FOOTER_COLS: {
 }[] = [
   {
     heading: 'Services',
-    links: SERVICE_NAMES.map((label) => ({ label, href: '#services' })),
+    links: SERVICE_NAMES.map((label) => ({ label, href: '/#services' })),
   },
   {
     heading: 'Navigate',
     links: [
-      { label: 'Services', href: '#services' },
-      { label: 'How it works', href: '#process' },
-      { label: 'Results', href: '#results' },
+      { label: 'Services', href: '/#services' },
+      { label: 'How it works', href: '/#process' },
+      { label: 'Results', href: '/#results' },
     ],
   },
   {
     heading: 'Contact',
     links: [
-      { label: 'Book a call', href: '#booking' },
+      { label: 'Book a call', href: '/#booking' },
       { label: 'joaautomations@gmail.com', href: 'mailto:joaautomations@gmail.com' },
     ],
   },
@@ -44,7 +44,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div style={{ marginBottom: 16 }}>
-              <BrandLockup variant="footer" />
+              <BrandLockup />
             </div>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, maxWidth: 240 }}>
               Custom AI workflows for small businesses, built, tested, and maintained by our team. Live in under a week.
@@ -87,14 +87,15 @@ export default function Footer() {
             © 2026 JOA Automations. All rights reserved.
           </span>
           <div style={{ display: 'flex', gap: 20 }}>
-            {['Privacy', 'Terms'].map(l => (
-              <a
-                key={l}
-                href="#"
-                onClick={e => e.preventDefault()}
-                style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', cursor: 'pointer' }}
-              >{l}</a>
-            ))}
+            <a
+              href="/privacy-policy"
+              style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}
+            >Privacy</a>
+            <a
+              href="#"
+              onClick={e => e.preventDefault()}
+              style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', cursor: 'pointer' }}
+            >Terms</a>
           </div>
         </div>
       </div>

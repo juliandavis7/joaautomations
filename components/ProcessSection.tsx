@@ -1,11 +1,11 @@
 'use client'
 
 const STEPS = [
-  { n: '01', title: 'Strategy call', body: '30-minute call to map your current tools, biggest time drains, and automation opportunities. Free, no pressure.' },
-  { n: '02', title: 'Custom workflow design', body: 'We design your automation blueprint with triggers, actions, and integrations, then walk you through it before we build anything.' },
-  { n: '03', title: 'Build & test', body: 'We build in your existing tools. Every workflow is tested end-to-end before going anywhere near live data.' },
-  { n: '04', title: 'Go live in days', body: 'Most workflows go live within 5–7 business days. We monitor the first week to catch anything unexpected.' },
-  { n: '05', title: 'Ongoing support', body: 'Monthly check-ins, updates when your tools change, and a direct line to our team rather than a ticket queue.' },
+  { n: '01', title: 'Free strategy call', body: '30-minute call to map your current tools, biggest time drains, and where automation would actually pay off. No pressure, no setup fee.' },
+  { n: '02', title: 'Custom proposal + live demo', body: 'We send a tailored automation blueprint and build a working demo you can call and test, so you experience it before committing to anything.' },
+  { n: '03', title: 'Build on your existing tools', body: "We layer automation on top of what you already use (your CRM, your booking system, etc.) so there's no new platform for your team to learn." },
+  { n: '04', title: 'Go live in days', body: 'Most workflows launch in 5 to 7 business days. We monitor closely the first week to catch anything unexpected.' },
+  { n: '05', title: 'Ongoing support, no lock-in', body: "Direct line to a software engineer, unlimited meetings to add new automations at no extra cost, and cancel anytime if it's not saving time or driving bookings." },
 ]
 
 export default function ProcessSection() {

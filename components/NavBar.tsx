@@ -5,9 +5,9 @@ import { Menu, X } from 'lucide-react'
 import BrandLockup from '@/components/BrandLockup'
 
 const LINKS = [
-  { label: 'Services', href: '#services' },
-  { label: 'How it works', href: '#process' },
-  { label: 'Results', href: '#results' },
+  { label: 'Services', href: '/#services' },
+  { label: 'How it works', href: '/#process' },
+  { label: 'Results', href: '/#results' },
 ]
 
 export default function NavBar() {
@@ -83,7 +83,7 @@ export default function NavBar() {
 
       {/* Desktop CTA */}
       <a
-        href="#booking"
+        href="/#booking"
         className="hidden md:inline-block"
         style={{
           background: '#6EA1EA', color: '#fff',
@@ -140,7 +140,7 @@ export default function NavBar() {
             </a>
           ))}
           <a
-            href="#booking"
+            href="/#booking"
             onClick={() => setMobileOpen(false)}
             style={{
               marginTop: 16,
