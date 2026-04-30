@@ -48,7 +48,7 @@ export default function HeroSection() {
 
       <div className="absolute inset-0">
         <div
-          className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(110,161,234,0.65),transparent_34%),radial-gradient(circle_at_82%_14%,rgba(35,155,229,0.48),transparent_30%),radial-gradient(circle_at_50%_78%,rgba(191,217,102,0.38),transparent_36%),linear-gradient(135deg,#071425_0%,#102D4E_48%,#071425_100%)]"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(110,161,234,0.65),transparent_34%),radial-gradient(circle_at_82%_14%,rgba(35,155,229,0.48),transparent_30%),radial-gradient(circle_at_50%_78%,rgba(59,130,246,0.34),transparent_36%),linear-gradient(135deg,#071425_0%,#102D4E_48%,#071425_100%)]"
           style={{ animation: 'ambientVibrance 9s ease-in-out infinite' }}
         />
         <div
@@ -117,7 +117,7 @@ export default function HeroSection() {
             </a>
             <a
               href="#process"
-              className="group inline-flex items-center justify-center gap-2 rounded-full border border-[#BFD966]/35 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-xl transition hover:scale-[1.02] hover:bg-[#BFD966]/12"
+              className="group inline-flex items-center justify-center gap-2 rounded-full border border-[#3B82F6]/45 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur-xl transition hover:scale-[1.02] hover:bg-[#3B82F6]/15"
             >
               <span>See how it works</span>
               <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
@@ -132,7 +132,7 @@ export default function HeroSection() {
           >
             {['50+ workflows built', 'Live in 5-7 days', 'ROI in the first 30 days'].map((item) => (
               <div key={item} className="flex items-center gap-2">
-                <span className="text-sm text-[#BFD966]">✓</span>
+                <span className="text-sm text-[#3B82F6]">✓</span>
                 <span className="text-sm text-white/65">{item}</span>
               </div>
             ))}
