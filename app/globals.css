@@ -19,7 +19,7 @@ html {
   margin: 0;
   padding: 0;
   width: 100%;
-  background-color: #061b31;
+  background-color: #102d4e;
 }
 
 body {
@@ -28,7 +28,7 @@ body {
   width: 100%;
   min-height: 100dvh;
   min-height: 100vh;
-  background-color: #061b31;
+  background-color: #102d4e;
   overflow-x: clip;
 }
 
@@ -38,10 +38,10 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0d2e4f;
+  background: #1a436e;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #533AFD;
+  background: #6ea1ea;
   border-radius: 3px;
 }

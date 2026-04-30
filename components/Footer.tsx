@@ -1,5 +1,7 @@
 'use client'
 
+import BrandLockup from '@/components/BrandLockup'
+
 const SERVICE_NAMES = [
   'AI Receptionist',
   'Calendar & Scheduling',
@@ -15,20 +17,20 @@ const FOOTER_COLS: {
 }[] = [
   {
     heading: 'Services',
-    links: SERVICE_NAMES.map((label) => ({ label, href: '#services' })),
+    links: SERVICE_NAMES.map((label) => ({ label, href: '/#services' })),
   },
   {
     heading: 'Navigate',
     links: [
-      { label: 'Services', href: '#services' },
-      { label: 'How it works', href: '#process' },
-      { label: 'Results', href: '#results' },
+      { label: 'Services', href: '/#services' },
+      { label: 'How it works', href: '/#process' },
+      { label: 'Results', href: '/#results' },
     ],
   },
   {
     heading: 'Contact',
     links: [
-      { label: 'Book a call', href: '#booking' },
+      { label: 'Book a call', href: '/#booking' },
       { label: 'joaautomations@gmail.com', href: 'mailto:joaautomations@gmail.com' },
     ],
   },
@@ -36,27 +38,13 @@ const FOOTER_COLS: {
 
 export default function Footer() {
   return (
-    <footer className="px-5 pt-14 pb-8 sm:px-8 md:px-10" style={{ background: '#061B31', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+    <footer className="px-5 pt-14 pb-8 sm:px-8 md:px-10" style={{ background: '#102D4E', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div className="mb-12 grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{
-                width: 32, height: 32, background: '#533AFD', borderRadius: 8,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <span style={{ color: '#fff', fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 800, fontSize: 14 }}>J</span>
-              </div>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              height: 32,
-            }}>
-              <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 800, fontSize: 15, color: '#fff', lineHeight: 1.1 }}>JOA</div>
-              <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 10, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em', lineHeight: 1.1, marginTop: 1 }}>Automations</div>
-            </div>
+            <div style={{ marginBottom: 16 }}>
+              <BrandLockup />
             </div>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, maxWidth: 240 }}>
               Custom AI workflows for small businesses, built, tested, and maintained by our team. Live in under a week.
@@ -99,14 +87,15 @@ export default function Footer() {
             © 2026 JOA Automations. All rights reserved.
           </span>
           <div style={{ display: 'flex', gap: 20 }}>
-            {['Privacy', 'Terms'].map(l => (
-              <a
-                key={l}
-                href="#"
-                onClick={e => e.preventDefault()}
-                style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', cursor: 'pointer' }}
-              >{l}</a>
-            ))}
+            <a
+              href="/privacy-policy"
+              style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none' }}
+            >Privacy</a>
+            <a
+              href="#"
+              onClick={e => e.preventDefault()}
+              style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: 'rgba(255,255,255,0.3)', textDecoration: 'none', cursor: 'pointer' }}
+            >Terms</a>
           </div>
         </div>
       </div>

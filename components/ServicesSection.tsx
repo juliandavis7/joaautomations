@@ -22,13 +22,13 @@ function ServiceCard({ eyebrow, title, body, Icon }: { eyebrow: string; title: s
       onMouseLeave={() => setHovered(false)}
       style={{
         background: '#fff', border: '1px solid #E8ECF0', borderRadius: 10, padding: '28px 24px',
-        boxShadow: hovered ? '0 8px 28px rgba(0,0,0,0.10)' : '0 2px 8px rgba(0,0,0,0.05)',
+        boxShadow: hovered ? '0 8px 28px rgba(76,135,219,0.16)' : '0 2px 8px rgba(0,0,0,0.05)',
         transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
         transition: 'all 220ms cubic-bezier(0.16,1,0.3,1)',
       }}
     >
       <div style={{
-        width: 40, height: 40, background: hovered ? '#533AFD' : '#f3f2ff',
+        width: 40, height: 40, background: hovered ? '#6EA1EA' : '#E8F4FA',
         borderRadius: 10, marginBottom: 16, transition: 'background 220ms',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
       }}>
@@ -36,14 +36,14 @@ function ServiceCard({ eyebrow, title, body, Icon }: { eyebrow: string; title: s
           width={20}
           height={20}
           strokeWidth={2}
-          color={hovered ? '#ffffff' : '#533AFD'}
+          color={hovered ? '#ffffff' : '#4C87DB'}
           style={{ transition: 'color 220ms' }}
           aria-hidden="true"
         />
       </div>
       <div style={{
         fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600,
-        letterSpacing: '0.09em', textTransform: 'uppercase', color: '#533AFD', marginBottom: 8,
+        letterSpacing: '0.09em', textTransform: 'uppercase', color: '#4C87DB', marginBottom: 8,
       }}>
         {eyebrow}
       </div>
@@ -60,7 +60,7 @@ export default function ServicesSection() {
         <div style={{ textAlign: 'center', marginBottom: 56 }}>
           <div style={{
             fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600,
-            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#533AFD', marginBottom: 12,
+            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4C87DB', marginBottom: 12,
           }}>
             What we do
           </div>

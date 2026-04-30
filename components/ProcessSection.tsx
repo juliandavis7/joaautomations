@@ -1,16 +1,16 @@
 'use client'
 
 const STEPS = [
-  { n: '01', title: 'Strategy call', body: '30-minute call to map your current tools, biggest time drains, and automation opportunities. Free, no pressure.' },
-  { n: '02', title: 'Custom workflow design', body: 'We design your automation blueprint with triggers, actions, and integrations, then walk you through it before we build anything.' },
-  { n: '03', title: 'Build & test', body: 'We build in your existing tools. Every workflow is tested end-to-end before going anywhere near live data.' },
-  { n: '04', title: 'Go live in days', body: 'Most workflows go live within 5–7 business days. We monitor the first week to catch anything unexpected.' },
-  { n: '05', title: 'Ongoing support', body: 'Monthly check-ins, updates when your tools change, and a direct line to our team rather than a ticket queue.' },
+  { n: '01', title: 'Free strategy call', body: '30-minute call to map your current tools, biggest time drains, and where automation would actually pay off. No pressure, no setup fee.' },
+  { n: '02', title: 'Custom proposal + live demo', body: 'We send a tailored automation blueprint and build a working demo you can call and test, so you experience it before committing to anything.' },
+  { n: '03', title: 'Build on your existing tools', body: "We layer automation on top of what you already use (your CRM, your booking system, etc.) so there's no new platform for your team to learn." },
+  { n: '04', title: 'Go live in days', body: 'Most workflows launch in 5 to 7 business days. We monitor closely the first week to catch anything unexpected.' },
+  { n: '05', title: 'Ongoing support, no lock-in', body: "Direct line to a software engineer, unlimited meetings to add new automations at no extra cost, and cancel anytime if it's not saving time or driving bookings." },
 ]
 
 export default function ProcessSection() {
   return (
-    <section id="process" className="px-5 py-16 sm:px-8 md:px-10 md:py-24" style={{ background: '#061B31', position: 'relative', overflow: 'hidden' }}>
+    <section id="process" className="px-5 py-16 sm:px-8 md:px-10 md:py-24" style={{ background: '#102D4E', position: 'relative', overflow: 'hidden' }}>
       {/* Subtle line texture */}
       <div style={{
         position: 'absolute', inset: 0, pointerEvents: 'none',
@@ -21,7 +21,7 @@ export default function ProcessSection() {
         <div style={{ textAlign: 'center', marginBottom: 64 }}>
           <div style={{
             fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600,
-            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#9b8ffe', marginBottom: 12,
+            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#7AC9DD', marginBottom: 12,
           }}>
             How it works
           </div>
@@ -40,13 +40,13 @@ export default function ProcessSection() {
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 48, flexShrink: 0 }}>
                 <div style={{
                   width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
-                  background: 'rgba(83,58,253,0.2)', border: '1px solid rgba(83,58,253,0.45)',
+                  background: 'rgba(110,161,234,0.24)', border: '1px solid rgba(122,201,221,0.55)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1,
                 }}>
-                  <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 12, fontWeight: 500, color: '#9b8ffe' }}>{s.n}</span>
+                  <span style={{ fontFamily: "'JetBrains Mono',monospace", fontSize: 12, fontWeight: 500, color: '#7AC9DD' }}>{s.n}</span>
                 </div>
                 {i < STEPS.length - 1 && (
-                  <div style={{ width: 1, flex: 1, minHeight: 32, background: 'rgba(83,58,253,0.25)', margin: '4px 0' }} />
+                  <div style={{ width: 1, flex: 1, minHeight: 32, background: 'rgba(122,201,221,0.35)', margin: '4px 0' }} />
                 )}
               </div>
               <div style={{ paddingBottom: 32, flex: 1 }}>
@@ -60,14 +60,14 @@ export default function ProcessSection() {
         <div style={{ textAlign: 'center', marginTop: 48 }}>
           <a href="#booking" style={{
             display: 'inline-block',
-            background: '#533AFD', color: '#fff',
+            background: '#6EA1EA', color: '#fff',
             fontFamily: "'DM Sans',sans-serif", fontSize: 15, fontWeight: 600,
             padding: '13px 28px', borderRadius: 4, border: 'none', cursor: 'pointer',
-            boxShadow: '0 6px 24px rgba(83,58,253,0.4)', transition: 'all 200ms',
+            boxShadow: '0 6px 24px rgba(110,161,234,0.4)', transition: 'all 200ms',
             textDecoration: 'none',
           }}
-            onMouseEnter={e => { e.currentTarget.style.background = '#3a25e8'; e.currentTarget.style.transform = 'translateY(-2px)' }}
-            onMouseLeave={e => { e.currentTarget.style.background = '#533AFD'; e.currentTarget.style.transform = 'translateY(0)' }}
+            onMouseEnter={e => { e.currentTarget.style.background = '#4C87DB'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+            onMouseLeave={e => { e.currentTarget.style.background = '#6EA1EA'; e.currentTarget.style.transform = 'translateY(0)' }}
           >Start with a free call</a>
         </div>
       </div>
