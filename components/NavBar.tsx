@@ -1,9 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
+import BrandLockup from '@/components/BrandLockup'
 
 const LINKS = [
   { label: 'Services', href: '#services' },
@@ -12,13 +11,28 @@ const LINKS = [
 ]
 
 export default function NavBar() {
-  const [scrolled, setScrolled] = useState(false)
+  /** True when the hero fully paints the 64px band under the fixed nav (no light section peeking through). */
+  /** Start false → solid nav until geometry is measured (avoids white-on-gray when scroll restores mid-page). */
+  const [heroCoversNavStripe, setHeroCoversNavStripe] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', handler)
-    return () => window.removeEventListener('scroll', handler)
+    const hero = document.getElementById('site-hero')
+    if (!hero) return
+
+    const updateHeroUnderNav = () => {
+      const r = hero.getBoundingClientRect()
+      const overlap = Math.min(r.bottom, 64) - Math.max(r.top, 0)
+      setHeroCoversNavStripe(overlap >= 63.5)
+    }
+
+    updateHeroUnderNav()
+    window.addEventListener('scroll', updateHeroUnderNav, { passive: true })
+    window.addEventListener('resize', updateHeroUnderNav)
+    return () => {
+      window.removeEventListener('scroll', updateHeroUnderNav)
+      window.removeEventListener('resize', updateHeroUnderNav)
+    }
   }, [])
 
   // Lock body scroll while mobile panel is open
@@ -32,9 +46,10 @@ export default function NavBar() {
     }
   }, [mobileOpen])
 
-  const navBg = scrolled || mobileOpen ? 'rgba(16,45,78,0.92)' : 'transparent'
-  const navBorder = scrolled || mobileOpen ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent'
-  const navBlur = scrolled || mobileOpen ? 'blur(14px)' : 'none'
+  const solidBar = mobileOpen || !heroCoversNavStripe
+  const navBg = solidBar ? 'rgba(16,45,78,0.94)' : 'rgba(16,45,78,0.72)'
+  const navBorder = solidBar ? '1px solid rgba(255,255,255,0.08)' : '1px solid rgba(255,255,255,0.06)'
+  const navBlur = 'blur(14px)'
 
   return (
     <nav
@@ -50,23 +65,7 @@ export default function NavBar() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}
     >
-      {/* Logo */}
-      <Link
-        href="/"
-        onClick={() => setMobileOpen(false)}
-        style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}
-      >
-        <Image src="/logo.png" alt="JOA logo" width={36} height={36} style={{ borderRadius: 999, flexShrink: 0 }} />
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          height: 34,
-        }}>
-          <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 800, fontSize: 16, color: '#fff', lineHeight: 1.1, letterSpacing: '-0.01em' }}>JOA</div>
-          <div style={{ fontFamily: "'DM Sans',sans-serif", fontWeight: 400, fontSize: 10, color: 'rgba(255,255,255,0.5)', letterSpacing: '0.05em', lineHeight: 1.1, marginTop: 1 }}>Automations</div>
-        </div>
-      </Link>
+      <BrandLockup href="/" onNavigate={() => setMobileOpen(false)} />
 
       {/* Desktop links */}
       <div className="hidden md:flex" style={{ gap: 32, alignItems: 'center' }}>

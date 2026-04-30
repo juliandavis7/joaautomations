@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react'
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
+    <section id="site-hero" className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
       <style>{`
         @keyframes gradientDrift {
           0% { transform: translate3d(-10%, -7%, 0) scale(0.96); }

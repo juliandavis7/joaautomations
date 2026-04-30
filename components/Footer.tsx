@@ -1,6 +1,6 @@
 'use client'
 
-import Image from 'next/image'
+import BrandLockup from '@/components/BrandLockup'
 
 const SERVICE_NAMES = [
   'AI Receptionist',
@@ -43,17 +43,8 @@ export default function Footer() {
         <div className="mb-12 grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <Image src="/logo.png" alt="JOA logo" width={32} height={32} style={{ borderRadius: 999, flexShrink: 0 }} />
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              height: 32,
-            }}>
-              <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 800, fontSize: 15, color: '#fff', lineHeight: 1.1 }}>JOA</div>
-              <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 10, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.05em', lineHeight: 1.1, marginTop: 1 }}>Automations</div>
-            </div>
+            <div style={{ marginBottom: 16 }}>
+              <BrandLockup variant="footer" />
             </div>
             <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 13, color: 'rgba(255,255,255,0.5)', lineHeight: 1.65, maxWidth: 240 }}>
               Custom AI workflows for small businesses, built, tested, and maintained by our team. Live in under a week.
