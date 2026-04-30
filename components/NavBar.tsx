@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 
 const LINKS = [
@@ -31,7 +32,7 @@ export default function NavBar() {
     }
   }, [mobileOpen])
 
-  const navBg = scrolled || mobileOpen ? 'rgba(6,27,49,0.92)' : 'transparent'
+  const navBg = scrolled || mobileOpen ? 'rgba(16,45,78,0.92)' : 'transparent'
   const navBorder = scrolled || mobileOpen ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent'
   const navBlur = scrolled || mobileOpen ? 'blur(14px)' : 'none'
 
@@ -55,12 +56,7 @@ export default function NavBar() {
         onClick={() => setMobileOpen(false)}
         style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}
       >
-        <div style={{
-          width: 34, height: 34, background: '#533AFD', borderRadius: 8,
-          display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-        }}>
-          <span style={{ color: '#fff', fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 800, fontSize: 15 }}>J</span>
-        </div>
+        <Image src="/logo.png" alt="JOA logo" width={36} height={36} style={{ borderRadius: 999, flexShrink: 0 }} />
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -91,14 +87,14 @@ export default function NavBar() {
         href="#booking"
         className="hidden md:inline-block"
         style={{
-          background: '#533AFD', color: '#fff',
+          background: '#6EA1EA', color: '#fff',
           fontFamily: "'DM Sans',sans-serif", fontSize: 13, fontWeight: 600,
           padding: '9px 20px', borderRadius: 4, border: 'none', cursor: 'pointer',
-          boxShadow: '0 4px 16px rgba(83,58,253,0.35)',
+          boxShadow: '0 4px 16px rgba(110,161,234,0.35)',
           transition: 'all 150ms', textDecoration: 'none',
         }}
-        onMouseEnter={e => { e.currentTarget.style.background = '#3a25e8'; e.currentTarget.style.transform = 'translateY(-1px)' }}
-        onMouseLeave={e => { e.currentTarget.style.background = '#533AFD'; e.currentTarget.style.transform = 'translateY(0)' }}
+        onMouseEnter={e => { e.currentTarget.style.background = '#4C87DB'; e.currentTarget.style.transform = 'translateY(-1px)' }}
+        onMouseLeave={e => { e.currentTarget.style.background = '#6EA1EA'; e.currentTarget.style.transform = 'translateY(0)' }}
       >Book a free call</a>
 
       {/* Mobile hamburger */}
@@ -123,7 +119,7 @@ export default function NavBar() {
           className="flex flex-col gap-1 md:hidden"
           style={{
             position: 'absolute', top: 64, left: 0, right: 0,
-            background: 'rgba(6,27,49,0.96)',
+            background: 'rgba(16,45,78,0.96)',
             backdropFilter: 'blur(14px)',
             WebkitBackdropFilter: 'blur(14px)',
             borderBottom: '1px solid rgba(255,255,255,0.08)',
@@ -149,10 +145,10 @@ export default function NavBar() {
             onClick={() => setMobileOpen(false)}
             style={{
               marginTop: 16,
-              background: '#533AFD', color: '#fff',
+              background: '#6EA1EA', color: '#fff',
               fontFamily: "'DM Sans',sans-serif", fontSize: 15, fontWeight: 600,
               padding: '14px 20px', borderRadius: 4,
-              boxShadow: '0 4px 16px rgba(83,58,253,0.35)',
+              boxShadow: '0 4px 16px rgba(110,161,234,0.35)',
               textDecoration: 'none', textAlign: 'center',
             }}
           >

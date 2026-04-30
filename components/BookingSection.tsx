@@ -21,7 +21,7 @@ export default function BookingSection() {
         <div style={{ textAlign: 'center', marginBottom: 56 }}>
           <div style={{
             fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600,
-            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#533AFD', marginBottom: 12,
+            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4C87DB', marginBottom: 12,
           }}>
             Get started
           </div>

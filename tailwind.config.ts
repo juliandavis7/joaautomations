@@ -10,13 +10,13 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          indigo: '#533AFD',
-          'indigo-light': '#9b8ffe',
-          'indigo-dark': '#3a25e8',
+          indigo: '#6EA1EA',
+          'indigo-light': '#7AC9DD',
+          'indigo-dark': '#4C87DB',
         },
         surface: {
-          navy: '#061B31',
-          'navy-scroll': '#0d2e4f',
+          navy: '#102D4E',
+          'navy-scroll': '#1A436E',
           white: '#ffffff',
           'gray-light': '#F4F6F8',
         },
@@ -30,8 +30,8 @@ const config: Config = {
           dark: 'rgba(255,255,255,0.08)',
         },
         accent: {
-          'purple-bg': '#f3f2ff',
-          'purple-border': '#e8e5ff',
+          'purple-bg': '#E8F4FA',
+          'purple-border': '#D7EAF3',
         },
       },
       fontFamily: {

@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 const SERVICE_NAMES = [
   'AI Receptionist',
   'Calendar & Scheduling',
@@ -36,18 +38,13 @@ const FOOTER_COLS: {
 
 export default function Footer() {
   return (
-    <footer className="px-5 pt-14 pb-8 sm:px-8 md:px-10" style={{ background: '#061B31', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+    <footer className="px-5 pt-14 pb-8 sm:px-8 md:px-10" style={{ background: '#102D4E', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div className="mb-12 grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-10">
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
-              <div style={{
-                width: 32, height: 32, background: '#533AFD', borderRadius: 8,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
-                <span style={{ color: '#fff', fontFamily: "'Plus Jakarta Sans',sans-serif", fontWeight: 800, fontSize: 14 }}>J</span>
-              </div>
+              <Image src="/logo.png" alt="JOA logo" width={32} height={32} style={{ borderRadius: 999, flexShrink: 0 }} />
             <div style={{
               display: 'flex',
               flexDirection: 'column',

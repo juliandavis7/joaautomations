@@ -39,7 +39,7 @@ export default function StatsSection() {
         <div style={{ textAlign: 'center', marginBottom: 60 }}>
           <div style={{
             fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600,
-            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#533AFD', marginBottom: 12,
+            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4C87DB', marginBottom: 12,
           }}>
             Results
           </div>
@@ -59,7 +59,7 @@ export default function StatsSection() {
             }}>
               <div style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 'clamp(32px, 8vw, 44px)', fontWeight: 800, color: '#0D1F35', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 8 }}>{s.value}</div>
               <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 500, color: '#0D1F35', marginBottom: 4 }}>{s.label}</div>
-              <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: '#533AFD', fontWeight: 500 }}>{s.delta}</div>
+              <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: '#4C87DB', fontWeight: 500 }}>{s.delta}</div>
             </div>
           ))}
         </div>
@@ -75,8 +75,8 @@ export default function StatsSection() {
             <div
               key={t.name + t.company}
               style={{
-                background: '#F3F0FA',
-                border: '1px solid #E4E0F0',
+                background: '#F2F9FC',
+                border: '1px solid #D7EAF3',
                 borderRadius: 14,
                 padding: '32px 28px',
                 display: 'flex',
@@ -105,7 +105,7 @@ export default function StatsSection() {
                     height: 60,
                     borderRadius: '50%',
                     flexShrink: 0,
-                    border: '1px solid #E4E0F0',
+                    border: '1px solid #D7EAF3',
                     background: '#fff',
                     display: 'flex',
                     alignItems: 'center',
