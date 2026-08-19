@@ -10,34 +10,30 @@
    direction-a/b/c replace the values, never the token names.
    ============================================================ */
 :root {
-  --paper: #FAFAF8;
-  --ink: #111110;
-  --accent: #3A3A37;
-  /* Text-safe cut of the accent. The accent proper is for rules, fills and
-     borders; anything that colors actual words uses this and has to clear
-     4.5:1 against --paper. B's acid green never colors text, so B points
-     this straight back at its ink. */
-  --accent-ink: #3A3A37;
+  /* Direction B — "Signal".
+     True white, true black, and one acid green. The most confident of the
+     three and the cheapest to execute perfectly — showing our own work as
+     the hero is the strongest argument a web design studio can make. The
+     risk is that with one face and no ornament, sloppy spacing is nakedly
+     visible, so nothing here is allowed to drift. */
+  --paper: #FFFFFF;
+  --ink: #000000;
+  --accent: #00E05A;          /* fills, rules, and the two green moments */
+  --accent-ink: #000000;      /* the green never colours text — it cannot clear 4.5:1 on white */
 
-  /* Work cards sit on the ground by default. C gives them a surface. */
   --card-bg: transparent;
   --card-pad: 0px;
 
-  /* Faces come from next/font in app/fonts.ts. A fork swaps the
-     imports there and leaves these aliases alone. */
+  /* IBM Plex Sans and its own mono cut. Registered in app/fonts.ts. */
   --font-display: var(--font-face-display), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-face-body), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* Hero still. Each fork ships its own bytes at this same path. */
   --hero-poster: url('/hero-poster.jpg');
-  /* All three stills are light-ground compositions, so the bar stays ink
-     over the hero. A direction that lands dark footage in Task B flips
-     this one value and gets the scrim with it. */
   --nav-over-hero: var(--ink);
   --hero-scrim: transparent;
 
-  /* Media weight. C deepens this; A and B keep it flat. */
+  /* Flat, hard-edged. No shadow anywhere in this direction. */
   --media-shadow: none;
   --media-radius: 0px;
 }
@@ -629,4 +625,113 @@ a:focus-visible > .arrow {
 
 .legal__body a {
   border-bottom: 1px solid var(--accent);
+}
+
+
+/* ---------- direction B: brackets, hard cuts, two green moments ---------- */
+
+/* The ornament is the bracket, and there is no graphic at all. */
+.eyebrow__ornament {
+  display: none;
+}
+
+.eyebrow__bracket {
+  display: inline;
+  opacity: 0.35;
+}
+
+.eyebrow {
+  gap: 8px;
+}
+
+/* Motion is a hard cut, not a fade: a 120ms clip-path wipe in four steps,
+   so it reads as a switch throwing rather than something easing in. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 120ms steps(4, end);
+  }
+
+  .reveal.is-in {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Rules are black hairlines; the green is spent only on the two moments
+   below and never on a rule that runs the width of the page. */
+.work-card {
+  border-top-color: var(--ink);
+}
+
+.work-card__quote {
+  border-left: 3px solid var(--accent);
+}
+
+/* Green moment one: the service word takes a solid block on hover/tap. */
+.services__word {
+  position: relative;
+  isolation: isolate;
+  padding-inline: 6px;
+}
+
+.services__word::before {
+  content: '';
+  position: absolute;
+  inset: 0.1em 0 0.08em;
+  background: var(--accent);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 120ms steps(4, end);
+  z-index: -1;
+}
+
+.services__word:hover::before,
+.services__word[aria-expanded='true']::before {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__word::before {
+    transition: none;
+  }
+}
+
+/* The peek is a hard-edged black plate, cut in rather than sprung. */
+.services__peek {
+  border: 3px solid var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .services__peek {
+    animation: peek-cut 120ms steps(4, end) both;
+  }
+}
+
+@keyframes peek-cut {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Green moment two: the submit rule. */
+.form__submit {
+  border-bottom-width: 3px;
+  border-bottom-color: var(--accent);
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  border-bottom-color: var(--accent);
+  border-bottom-width: 2px;
+}
+
+.work-card__link:hover,
+.footer__email:hover,
+.legal__body a:hover {
+  border-bottom-color: var(--accent);
 }

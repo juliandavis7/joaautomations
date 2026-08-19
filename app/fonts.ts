@@ -1,35 +1,32 @@
 /**
- * The direction's two-or-three faces, registered through next/font and
- * exposed as CSS variables only. Components never name a family — they
- * use --font-display / --font-body / --font-mono via Tailwind tokens.
+ * Direction B — "Signal". One face doing everything: IBM Plex Sans at 400
+ * for display and body, and its own mono cut for the small text. The
+ * discipline is the point — with a single family and no ornament, any
+ * sloppy spacing is nakedly visible.
  *
- * A direction fork rewrites this file and the token block in globals.css.
- * Nothing else.
- *
- * Shared base: Inter Tight for display and body, JetBrains Mono for the
- * small text. Neutral on purpose.
+ * Exposed as CSS variables only. Components never name a family.
  */
-import { Inter_Tight, JetBrains_Mono } from 'next/font/google'
+import { IBM_Plex_Sans, IBM_Plex_Mono } from 'next/font/google'
 
-const display = Inter_Tight({
+const sans = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-face-display',
   display: 'swap',
 })
 
-const body = Inter_Tight({
+const body = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-face-body',
   display: 'swap',
 })
 
-const mono = JetBrains_Mono({
+const mono = IBM_Plex_Mono({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-face-mono',
   display: 'swap',
 })
 
-export const fontClassName = `${display.variable} ${body.variable} ${mono.variable}`
+export const fontClassName = `${sans.variable} ${body.variable} ${mono.variable}`
