@@ -1,24 +1,22 @@
 /**
- * The direction's two-or-three faces, registered through next/font and
- * exposed as CSS variables only. Components never name a family — they
- * use --font-display / --font-body / --font-mono via Tailwind tokens.
+ * Direction C — "Long shadow". A high-contrast display serif against a
+ * neutral sans, with mono on the metadata. The serif is the
+ * differentiator: it reads editorial and design-literate, and it signals
+ * brand and copy as a real service line rather than an add-on.
  *
- * A direction fork rewrites this file and the token block in globals.css.
- * Nothing else.
- *
- * Shared base: Inter Tight for display and body, JetBrains Mono for the
- * small text. Neutral on purpose.
+ * Three faces, all at 400. Instrument Serif ships one weight, which keeps
+ * the one-weight rule honest by construction.
  */
-import { Inter_Tight, JetBrains_Mono } from 'next/font/google'
+import { Instrument_Serif, Inter, JetBrains_Mono } from 'next/font/google'
 
-const display = Inter_Tight({
+const serif = Instrument_Serif({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-face-display',
   display: 'swap',
 })
 
-const body = Inter_Tight({
+const sans = Inter({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-face-body',
@@ -32,4 +30,4 @@ const mono = JetBrains_Mono({
   display: 'swap',
 })
 
-export const fontClassName = `${display.variable} ${body.variable} ${mono.variable}`
+export const fontClassName = `${serif.variable} ${sans.variable} ${mono.variable}`

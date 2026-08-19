@@ -10,36 +10,37 @@
    direction-a/b/c replace the values, never the token names.
    ============================================================ */
 :root {
-  --paper: #FAFAF8;
-  --ink: #111110;
-  --accent: #3A3A37;
-  /* Text-safe cut of the accent. The accent proper is for rules, fills and
-     borders; anything that colors actual words uses this and has to clear
-     4.5:1 against --paper. B's acid green never colors text, so B points
-     this straight back at its ink. */
-  --accent-ink: #3A3A37;
+  /* Direction C — "Long shadow".
+     Near-white ground, deep ink blue, and a soft large real shadow as the
+     signature: cards and media get physical weight on the page. The known
+     risk is that a display serif is a strong flavour and will date faster
+     than A or B. */
+  --paper: #F7F7F5;
+  --ink: #141414;
+  --accent: #1B2ECC;
+  --accent-ink: #1B2ECC;      /* 8.6:1 on the paper — safe on text as well as rules */
 
-  /* Work cards sit on the ground by default. C gives them a surface. */
-  --card-bg: transparent;
-  --card-pad: 0px;
+  /* Cards are objects here, not regions of the ground. */
+  --card-bg: #FFFFFF;
+  --card-pad: clamp(24px, 4vw, 56px);
 
-  /* Faces come from next/font in app/fonts.ts. A fork swaps the
-     imports there and leaves these aliases alone. */
-  --font-display: var(--font-face-display), ui-sans-serif, system-ui, sans-serif;
+  /* Instrument Serif display, Inter body, JetBrains Mono metadata.
+     Registered in app/fonts.ts. */
+  --font-display: var(--font-face-display), ui-serif, Georgia, serif;
   --font-body: var(--font-face-body), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* Hero still. Each fork ships its own bytes at this same path. */
   --hero-poster: url('/hero-poster.jpg');
-  /* All three stills are light-ground compositions, so the bar stays ink
-     over the hero. A direction that lands dark footage in Task B flips
-     this one value and gets the scrim with it. */
   --nav-over-hero: var(--ink);
   --hero-scrim: transparent;
 
-  /* Media weight. C deepens this; A and B keep it flat. */
-  --media-shadow: none;
-  --media-radius: 0px;
+  /* The signature element. Large, soft, and low-opacity — a real shadow,
+     not a glow and not a colored drop shadow. */
+  --media-shadow: 0 48px 90px -34px rgba(20, 20, 20, 0.28),
+    0 10px 24px -14px rgba(20, 20, 20, 0.14);
+  --media-shadow-deep: 0 70px 120px -36px rgba(20, 20, 20, 0.38),
+    0 16px 34px -16px rgba(20, 20, 20, 0.2);
+  --media-radius: 6px;
 }
 
 /* ============================================================
@@ -629,4 +630,82 @@ a:focus-visible > .arrow {
 
 .legal__body a {
   border-bottom: 1px solid var(--accent);
+}
+
+
+/* ---------- direction C: weight, and a serif that has to earn it ---------- */
+
+/* The serif runs large and open; Instrument Serif's own metrics are tight
+   at display size, so it gets a hair more room than the sans directions. */
+.display {
+  line-height: 1.05;
+}
+
+/* The eyebrow label sits in a small pill with a hairline border. That pill
+   is the whole ornament — the rule the other directions draw is dropped. */
+.eyebrow__ornament {
+  display: none;
+}
+
+.eyebrow__label {
+  display: inline-block;
+  padding: 7px 14px 6px;
+  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  border-radius: 999px;
+  line-height: 1;
+}
+
+/* Cards are objects on the ground, so they carry the shadow rather than a
+   dividing rule. */
+.work-card {
+  border-top: 0;
+  padding-block: var(--card-pad);
+  border-radius: var(--media-radius);
+}
+
+.work-card:hover {
+  box-shadow: var(--media-shadow-deep);
+}
+
+.work-card__quote {
+  border-left-color: var(--accent);
+}
+
+.services__peek {
+  box-shadow: var(--media-shadow-deep);
+}
+
+/* Media scales in rather than rising: 1.04 -> 1.0 as it enters. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: scale(1.04);
+    transition: opacity 600ms ease, transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.services__word {
+  transition: color 220ms ease;
+}
+
+.work-card__link,
+.footer__email,
+.legal__body a {
+  border-bottom-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.work-card__link:hover,
+.footer__email:hover,
+.legal__body a:hover {
+  border-bottom-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.form__submit {
+  color: var(--accent-ink);
 }
