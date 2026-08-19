@@ -27,6 +27,9 @@ const DIRECTION = {
   mono: process.env.JOA_MONO ?? 'JetBrains Mono',
   // Hero still treatment: 'ruled' (A) | 'scan' (B) | 'depth' (C) | 'plain'
   hero: process.env.JOA_HERO ?? 'plain',
+  // JPEG quality for the hero still. The still is the LCP candidate behind
+  // the fold-height hero, so bytes here move the mobile score directly.
+  quality: process.env.JOA_JPEG_Q ?? '62',
 }
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
@@ -200,7 +203,7 @@ ${stages[DIRECTION.hero] ?? stages.plain}
 <div class="grain"></div><div class="vig"></div>`
 
 const heroPng = shot(hero, { width: 1600, height: 1000, out: 'hero' })
-execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '72', heroPng, '--out', 'public/hero-poster.jpg'], {
+execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', DIRECTION.quality, heroPng, '--out', 'public/hero-poster.jpg'], {
   stdio: 'ignore',
 })
 
