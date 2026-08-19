@@ -12,9 +12,11 @@ then `migration-plan.md` §9.
 | Branch | Path | Port | State |
 | --- | --- | --- | --- |
 | `task-a/shared-base` | `/Users/juliandavis/dev/joaautomations` | 4100 (QA only) | Done, 35/35 |
-| `direction-a` | `/Users/juliandavis/dev/joaautomations-direction-a` | 3001 | Styled, 35/35 |
-| `direction-b` | `/Users/juliandavis/dev/joaautomations-direction-b` | 3002 | not started |
-| `direction-c` | `/Users/juliandavis/dev/joaautomations-direction-c` | 3003 | not started |
+| `direction-a` | `/Users/juliandavis/dev/joaautomations-direction-a` | 3001 | **Done** — 35/35, LH 99/100 |
+| `direction-b` | `/Users/juliandavis/dev/joaautomations-direction-b` | 3002 | **Done** — 35/35, LH 98/100 |
+| `direction-c` | `/Users/juliandavis/dev/joaautomations-direction-c` | 3003 | **Done** — 35/35, LH 99/100 |
+
+The run is complete. `docs/bake-off.md` is the deliverable write-up.
 
 Port 3000 is occupied by a pre-existing dev server that is **not** part of
 this run — leave it alone.
@@ -69,8 +71,14 @@ node scripts/qa.mjs http://localhost:300X --shots <scratch>/shots-X
 
 ## Remaining
 
-- [ ] direction-b, direction-c: tokens, assets, §9 loop
-- [ ] Lighthouse mobile >=95 perf + a11y on each production build
-- [ ] Per-variant note (fonts, palette, hero, gaps)
-- [ ] Surviving `[FILL IN]` inventory (17 markers on the shared base)
-- [ ] Leave all three servers running on 3001/3002/3003 for review
+- [x] direction-b, direction-c: tokens, assets, §9 loop
+- [x] Lighthouse mobile >=95 perf + a11y on each production build
+- [x] Per-variant note (fonts, palette, hero, gaps) — `docs/bake-off.md`
+- [x] Surviving `[FILL IN]` inventory (17 markers) — `docs/bake-off.md`
+- [x] Leave all three servers running on 3001/3002/3003 for review
+
+Nothing is merged, no winner is picked, nothing is deployed — as instructed.
+
+If you pick a winner later: merge that direction into `main`, delete the
+other two worktrees with `git worktree remove`, and the fill-ins in
+`docs/bake-off.md` become the next round of work.
