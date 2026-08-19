@@ -10,29 +10,27 @@
    direction-a/b/c replace the values, never the token names.
    ============================================================ */
 :root {
-  --paper: #FAFAF8;
-  --ink: #111110;
-  --accent: #3A3A37;
-  /* Text-safe cut of the accent. The accent proper is for rules, fills and
-     borders; anything that colors actual words uses this and has to clear
-     4.5:1 against --paper. B's acid green never colors text, so B points
-     this straight back at its ink. */
-  --accent-ink: #3A3A37;
+  /* Direction A — "Drafting table".
+     Warm paper and a drafting vocabulary: made-by-hand without saying it.
+     Maximum distance from the reference's cool paper and electric blue,
+     and from the SaaS blue this site used to wear. */
+  --paper: #FBFAF7;
+  --ink: #0F0F0E;
+  --accent: #D6421F;          /* burnt orange — hover fills and the eyebrow rule */
+  --accent-ink: #A82F10;      /* 5.7:1 on the paper; the raw orange is 4.0:1 */
 
-  /* Work cards sit on the ground by default. C gives them a surface. */
   --card-bg: transparent;
   --card-pad: 0px;
 
-  /* Faces come from next/font in app/fonts.ts. A fork swaps the
-     imports there and leaves these aliases alone. */
+  /* Inter Tight for display and body, JetBrains Mono for the small text.
+     Registered in app/fonts.ts; nothing here names a family directly. */
   --font-display: var(--font-face-display), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-face-body), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, monospace;
 
-  /* Hero still. Each fork ships its own bytes at this same path. */
   --hero-poster: url('/hero-poster.jpg');
 
-  /* Media weight. C deepens this; A and B keep it flat. */
+  /* Flat. The weight in this direction comes from the ruled grid, not shadow. */
   --media-shadow: none;
   --media-radius: 0px;
 }
@@ -214,11 +212,29 @@ a:focus-visible > .arrow {
 
 /* Default ornament: a ruled line. direction-b (brackets) and
    direction-c (pill) override this rule and nothing else. */
+/* A's ornament is a ruled pencil mark: a hairline that overshoots its own
+   end by a few pixels and sits a quarter-degree off true, the way a line
+   drawn against a straightedge does. */
 .eyebrow__ornament {
+  position: relative;
   flex: 1 1 auto;
   height: 1px;
+  max-width: 140px;
   background: var(--accent);
-  max-width: 120px;
+  transform: rotate(-0.3deg);
+  transform-origin: left center;
+}
+
+.eyebrow__ornament::after {
+  content: '';
+  position: absolute;
+  right: -9px;
+  top: -2px;
+  width: 14px;
+  height: 1px;
+  background: var(--accent);
+  transform: rotate(-4deg);
+  opacity: 0.7;
 }
 
 .eyebrow__bracket {
@@ -624,4 +640,61 @@ a:focus-visible > .arrow {
 
 .legal__body a {
   border-bottom: 1px solid var(--accent);
+}
+
+
+/* ---------- direction A: the drafting surface ---------- */
+
+body {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 5%, transparent) 1px, transparent 1px);
+  background-size: 46px 46px, 46px 46px;
+  background-attachment: fixed;
+}
+
+/* Rules are drawn, not printed: everything horizontal picks up the same
+   quarter-degree tilt the eyebrow ornament has. */
+.work-card {
+  border-top-color: color-mix(in srgb, var(--ink) 18%, transparent);
+}
+
+.work-card__quote {
+  border-left-color: var(--accent);
+}
+
+/* Hover fills are the only place the orange goes solid. */
+.services__word {
+  position: relative;
+  isolation: isolate;
+  padding-inline: 4px;
+}
+
+.services__word::before {
+  content: '';
+  position: absolute;
+  inset: 0.12em 0 0.06em;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 220ms ease;
+  z-index: -1;
+}
+
+.services__word:hover::before,
+.services__word[aria-expanded='true']::before {
+  transform: scaleY(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__word::before {
+    transition: none;
+  }
+}
+
+.work-card__link:hover,
+.footer__email:hover,
+.legal__body a:hover {
+  border-bottom-color: var(--accent);
+  color: var(--accent-ink);
 }
