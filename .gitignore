@@ -65,3 +65,6 @@ Desktop.ini
 
 # One-off Pillow venv used to rasterize icons (prefer sharp in /tmp)
 .venv-sign-icons/
+
+# Direction worktrees live beside the repo, not inside it
+/worktrees/

@@ -1,43 +1,41 @@
 import type { Config } from 'tailwindcss'
 
+/**
+ * Every value here resolves to a CSS variable defined in app/globals.css.
+ * A direction fork changes the variables, never this file — that is what
+ * keeps the three worktrees structurally identical.
+ */
 const config: Config = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './content/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        brand: {
-          indigo: '#6EA1EA',
-          'indigo-light': '#7AC9DD',
-          'indigo-dark': '#4C87DB',
-        },
-        surface: {
-          navy: '#102D4E',
-          'navy-scroll': '#1A436E',
-          white: '#ffffff',
-          'gray-light': '#F4F6F8',
-        },
-        content: {
-          dark: '#0D1F35',
-          gray: '#4A5568',
-          muted: '#8896A8',
-        },
-        border: {
-          light: '#E8ECF0',
-          dark: 'rgba(255,255,255,0.08)',
-        },
-        accent: {
-          'purple-bg': '#E8F4FA',
-          'purple-border': '#D7EAF3',
-        },
+        paper: 'var(--paper)',
+        ink: 'var(--ink)',
+        accent: 'var(--accent)',
+        line: 'var(--line)',
       },
       fontFamily: {
-        jakarta: ['var(--font-plus-jakarta)', 'sans-serif'],
-        dm: ['var(--font-dm-sans)', 'sans-serif'],
-        mono: ['var(--font-jetbrains)', 'monospace'],
+        display: 'var(--font-display)',
+        body: 'var(--font-body)',
+        mono: 'var(--font-mono)',
+      },
+      fontSize: {
+        display: ['var(--t-display)', { lineHeight: 'normal', fontWeight: '400' }],
+        body: ['var(--t-body)', { lineHeight: '1.45', fontWeight: '400' }],
+        mono: ['var(--t-mono)', { lineHeight: '1', fontWeight: '400' }],
+      },
+      spacing: {
+        side: 'var(--side)',
+        sect: 'var(--sect)',
+        'sect-gap': 'var(--sect-gap)',
+      },
+      maxWidth: {
+        ct: 'var(--ct-max)',
       },
     },
   },

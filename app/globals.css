@@ -2,46 +2,615 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   DIRECTION TOKENS — the only block a worktree fork rewrites.
+   Ground / ink / accent, the three faces, and the eyebrow
+   ornament. Everything below this block is shared structure.
+   Shared base ships a deliberately neutral graphite direction;
+   direction-a/b/c replace the values, never the token names.
+   ============================================================ */
+:root {
+  --paper: #FAFAF8;
+  --ink: #111110;
+  --accent: #3A3A37;
+
+  /* Faces come from next/font in app/fonts.ts. A fork swaps the
+     imports there and leaves these aliases alone. */
+  --font-display: var(--font-face-display), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-face-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, monospace;
+
+  /* Hero still. Each fork ships its own bytes at this same path. */
+  --hero-poster: url('/hero-poster.jpg');
+
+  /* Media weight. C deepens this; A and B keep it flat. */
+  --media-shadow: none;
+  --media-radius: 0px;
+}
+
+/* ============================================================
+   SHARED STRUCTURE
+   ============================================================ */
+:root {
+  /* Container. Extra-large screens get more margin, never bigger type. */
+  --ct-max: 1240px;
+  --ct-gutter: 20px;                    /* S tier */
+  --side: max(var(--ct-gutter), calc((100vw - var(--ct-max)) / 2));
+
+  /* Type — three sizes, one weight (400), tracking normal.
+     Designed at 390px; each clamp records its computed value there. */
+  --t-display: clamp(36px, 8.6vw, 60px);   /* 34 -> 36 @ 390 */
+  --t-body: clamp(21px, 4.4vw, 30px);      /* 17 -> 21 @ 390 */
+  --t-mono: clamp(14px, 3.6vw, 20px);      /* 14 @ 390 */
+
+  /* Vertical rhythm */
+  --sect: clamp(130px, 38.5vw, 210px);     /* 150 @ 390 */
+  --sect-gap: clamp(40px, 10vw, 70px);     /* eyebrow -> content */
+
+  --line: color-mix(in srgb, var(--ink) 14%, transparent);
+}
+
+@media (min-width: 735px) {
+  :root {
+    --ct-gutter: 40px;
+    --sect: 120px;
+  }
+}
+
+@media (min-width: 1069px) {
+  :root {
+    --ct-gutter: 64px;
+    --sect: 160px;
+  }
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
-/* Full-bleed canvas: default html background is white, so gutters show as white stripes
-   unless html is painted too and margins are cleared. */
 html {
+  -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  background-color: #102d4e;
 }
 
+/* clip, not hidden — does not create a scroll container, so sticky survives */
+html,
 body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  min-height: 100dvh;
-  min-height: 100vh;
-  background-color: #102d4e;
   overflow-x: clip;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
 }
 
-::-webkit-scrollbar-track {
-  background: #1a436e;
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #6ea1ea;
-  border-radius: 3px;
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+  letter-spacing: normal;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:where(a, button, input, textarea, select, [tabindex]) {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(a, button, input, textarea, select, summary):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- layout primitives ---------- */
+
+.container {
+  padding-inline: var(--side);
+}
+
+.section {
+  padding-block: var(--sect);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  line-height: normal;
+  font-weight: 400;
+}
+
+.body {
+  font-size: var(--t-body);
+  line-height: 1.45;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: 1;
+  font-weight: 400;
+}
+
+.measure {
+  max-width: 22ch;
+}
+
+.measure-body {
+  max-width: 34ch;
+}
+
+/* ---------- the ↗ affordance ---------- */
+
+.arrow {
+  display: inline-block;
+  transition: transform 200ms ease;
+}
+
+a:hover > .arrow,
+a:focus-visible > .arrow {
+  transform: translateX(3px) translateY(-2px);
+}
+
+/* ---------- eyebrow + per-direction ornament ---------- */
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: 1;
+  color: var(--ink);
+}
+
+/* Default ornament: a ruled line. direction-b (brackets) and
+   direction-c (pill) override this rule and nothing else. */
+.eyebrow__ornament {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--accent);
+  max-width: 120px;
+}
+
+.eyebrow__bracket {
+  display: none;
+}
+
+/* ---------- reveal: opt-in motion only ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 600ms ease, transform 600ms ease;
+  }
+
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- hero ---------- */
+
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 480px;
+  pointer-events: none;
+  background-color: var(--ink);
+  background-image: var(--hero-poster);
+  background-size: cover;
+  background-position: 50% 30%;
+}
+
+/* Scrim behind the fixed bar so white nav type always clears contrast,
+   whatever the still underneath is doing. */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 220px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent);
+}
+
+/* ---------- nav ---------- */
+
+.nav {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  padding-top: calc(18px + env(safe-area-inset-top));
+  padding-bottom: 18px;
+  padding-inline: var(--side);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ink);
+  transition: transform 300ms ease, opacity 300ms ease, color 300ms ease;
+}
+
+/* Over the hero still the bar sits on a dark scrim, so it inverts.
+   Deterministic instead of mix-blend-mode, which we cannot contrast-check. */
+.nav[data-over-hero='true'] {
+  color: #fff;
+}
+
+.nav[data-hidden='true'] {
+  transform: translateY(-110%);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav {
+    transition: none;
+  }
+}
+
+/* ---------- [FILL IN] markers ---------- */
+
+.fillin {
+  font-family: var(--font-mono);
+  font-size: 0.72em;
+  line-height: 1.3;
+  border-bottom: 1px dotted var(--accent);
+  opacity: 0.85;
+}
+
+/* ---------- work cards ---------- */
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding-block: 36px;
+  border-top: 1px solid var(--line);
+  border-radius: var(--media-radius);
+  box-shadow: var(--media-shadow);
+  transition: box-shadow 300ms ease;
+}
+
+.work-card__client {
+  margin-top: 20px;
+  opacity: 0.6;
+}
+
+.work-card__story {
+  margin-top: 24px;
+  max-width: 38ch;
+}
+
+.work-card__quote {
+  margin-top: 36px;
+  padding-left: 20px;
+  border-left: 1px solid var(--accent);
+  max-width: 40ch;
+}
+
+.work-card__quote figcaption {
+  margin-top: 18px;
+  opacity: 0.6;
+}
+
+.cs-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cs-row {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.cs-row dt {
+  flex: 0 0 auto;
+  min-width: 9ch;
+  opacity: 0.5;
+}
+
+.cs-row dd {
+  margin: 0;
+}
+
+.work-card__link {
+  display: inline-block;
+  margin-top: 28px;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+}
+
+@media (min-width: 1069px) {
+  .work-card {
+    flex-direction: row;
+    gap: 80px;
+    padding-block: 70px 22px;
+    min-height: 152px;
+  }
+
+  .work-card__main {
+    flex: 1 1 62.5%;
+  }
+
+  .work-card__aside {
+    flex: 0 0 30%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cs-meta {
+    margin-top: auto;
+  }
+}
+
+/* ---------- services ---------- */
+
+.services {
+  position: relative;
+  margin-top: var(--sect-gap);
+}
+
+.services__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.services__word {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  transition: color 200ms ease;
+}
+
+.services__word:hover,
+.services__word[aria-expanded='true'] {
+  color: var(--accent);
+}
+
+.services__peek {
+  position: absolute;
+  z-index: 2;
+  width: min(360px, 62vw);
+  height: min(270px, 46vw);
+  pointer-events: none;
+  transform: translate(-50%, -50%) rotate(var(--tilt, 0deg));
+  border-radius: var(--media-radius);
+  box-shadow: var(--media-shadow);
+  background: var(--ink);
+  color: var(--paper);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.services__peek img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.services__peek-marker {
+  text-align: center;
+  line-height: 1.4;
+  font-size: 13px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .services__peek {
+    animation: peek-in 260ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+}
+
+@keyframes peek-in {
+  from {
+    transform: translate(-50%, -50%) scale(0.6) rotate(-6deg);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1) rotate(var(--tilt, 0deg));
+    opacity: 1;
+  }
+}
+
+.services__hint {
+  margin-top: 40px;
+  opacity: 0.5;
+}
+
+/* Touch gets a different prompt, not the same prompt in a smaller size.
+   A hint that says "hover me" on a phone is a bug. */
+@media (pointer: coarse) {
+  .services__hint-hover {
+    display: none;
+  }
+
+  .services__hint::after {
+    content: 'tap me';
+  }
+}
+
+/* ---------- contact form ---------- */
+
+.form {
+  margin-top: var(--sect-gap);
+  max-width: 44ch;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.form__row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form__row label {
+  opacity: 0.5;
+}
+
+.form input,
+.form textarea,
+.form select {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  padding: 10px 0;
+  font-family: var(--font-body);
+  font-size: clamp(18px, 4vw, 22px);
+  line-height: 1.4;
+  transition: border-color 200ms ease;
+}
+
+.form textarea {
+  resize: vertical;
+}
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  border-bottom-color: var(--accent);
+}
+
+.form__honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.form__submit {
+  align-self: flex-start;
+  appearance: none;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--accent);
+  padding: 0 0 4px;
+  cursor: pointer;
+  color: var(--accent);
+}
+
+.form__submit:disabled {
+  cursor: progress;
+  opacity: 0.5;
+}
+
+.form__status {
+  min-height: 1.4em;
+  line-height: 1.4;
+}
+
+.form__status[data-state='error'] {
+  color: var(--accent);
+}
+
+/* ---------- footer ---------- */
+
+.footer {
+  padding-block: var(--sect) calc(40px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+}
+
+.footer__wordmark {
+  line-height: 1;
+}
+
+.footer__email {
+  display: inline-block;
+  margin-top: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.footer__legal {
+  margin-top: 60px;
+  display: flex;
+  gap: 24px;
+  opacity: 0.5;
+}
+
+/* ---------- legal page ---------- */
+
+.legal {
+  padding-top: calc(var(--sect) + 40px);
+}
+
+.legal__updated {
+  margin-top: 24px;
+  opacity: 0.5;
+}
+
+.legal__body {
+  margin-top: var(--sect-gap);
+  max-width: 60ch;
+  font-size: clamp(17px, 3.4vw, 20px);
+  line-height: 1.6;
+}
+
+.legal__body h2 {
+  margin-top: 48px;
+  opacity: 0.5;
+}
+
+.legal__body p {
+  margin-top: 14px;
+}
+
+.legal__body a {
+  border-bottom: 1px solid var(--accent);
 }

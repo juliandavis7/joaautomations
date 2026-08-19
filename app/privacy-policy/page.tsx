@@ -1,97 +1,81 @@
 import type { Metadata } from 'next'
-import NavBar from '@/components/NavBar'
 import Footer from '@/components/Footer'
+import NavBar from '@/components/NavBar'
+import { site } from '@/content/site'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — JOA Automations',
-  description:
-    'How JOA Automations collects, uses, and protects your personal information when you use our website or book a call.',
+  title: `Privacy — ${site.wordmark}`,
+  description: `How ${site.wordmark} handles information collected through ${site.domain}.`,
 }
 
-export default function PrivacyPolicyPage() {
+/**
+ * Rewritten this round. The previous copy described an AI automation
+ * agency running SMS sequences and a booking widget; none of that is what
+ * this site does now.
+ */
+export default function PrivacyPolicy() {
   return (
     <>
       <NavBar />
-      <main
-        className="px-5 sm:px-8 md:px-10"
-        style={{
-          paddingTop: 64 + 56,
-          paddingBottom: 80,
-          background: '#ffffff',
-          minHeight: '100vh',
-        }}
-      >
-        <article
-          style={{
-            maxWidth: 720,
-            margin: '0 auto',
-            fontFamily: "'DM Sans',sans-serif",
-            color: '#333333',
-            fontSize: 15,
-            lineHeight: 1.7,
-          }}
-        >
-          <h1
-            style={{
-              fontFamily: "'Plus Jakarta Sans',sans-serif",
-              fontSize: 'clamp(1.75rem, 4vw, 2.25rem)',
-              fontWeight: 700,
-              color: '#102D4E',
-              marginBottom: 12,
-              lineHeight: 1.2,
-            }}
-          >
-            Privacy Policy
-          </h1>
-          <p
-            style={{
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: '0.06em',
-              textTransform: 'uppercase',
-              color: '#102D4E',
-              opacity: 0.75,
-              marginBottom: 28,
-            }}
-          >
-            Last updated April 30, 2026
-          </p>
+      <main id="top" className="container section legal">
+        <div className="max-w-ct mx-auto">
+          <h1 className="display">Privacy</h1>
+          <p className="mono legal__updated">Last updated 19 August 2026</p>
 
-          <p style={{ marginBottom: 20 }}>
-            At <strong>JOA Automations</strong>, your privacy is important to us. When you fill out a
-            form or book a call, we collect the information you provide (such as your name, email,
-            phone number, and business details) solely for the purpose of responding to your inquiry
-            and delivering our services.
-          </p>
+          <div className="legal__body">
+            <h2 className="mono">Who we are</h2>
+            <p>
+              {site.wordmark} is a two-person studio. We design and build websites, implement
+              CRMs, and automate small-business workflows. This policy covers {site.domain}.
+            </p>
 
-          <p style={{ marginBottom: 8 }}>We may use your information to:</p>
-          <ul style={{ margin: '0 0 20px', paddingLeft: 22, listStyleType: 'disc' }}>
-            <li style={{ marginBottom: 6 }}>Contact you regarding your request or booking</li>
-            <li style={{ marginBottom: 6 }}>
-              Send relevant updates or information about our services (only if you opt in)
-            </li>
-            <li style={{ marginBottom: 6 }}>Improve our communication and automation systems</li>
-          </ul>
+            <h2 className="mono">What we collect</h2>
+            <p>
+              Only what you type into the contact form: your name, your email address, a
+              description of what you are building, and a budget range. There is no account to
+              create, and we do not ask for anything else.
+            </p>
 
-          <p style={{ marginBottom: 20 }}>
-            We <strong>do not sell, rent, or share</strong> your personal information with any third
-            parties. All data is stored securely and only accessed by authorized team members when
-            necessary to serve you. You can request that we delete your information at any time by
-            contacting us at{' '}
-            <a
-              href="mailto:joaautomations@gmail.com"
-              style={{ color: '#102D4E', fontWeight: 600, textDecoration: 'underline' }}
-            >
-              joaautomations@gmail.com
-            </a>
-            .
-          </p>
+            <h2 className="mono">Why we collect it</h2>
+            <p>
+              To read your message and write back. That is the whole purpose. We do not sell
+              it, rent it, or add you to a marketing list, and we do not send you anything you
+              did not ask for.
+            </p>
 
-          <p style={{ marginBottom: 0 }}>
-            By submitting any form on our site, you agree to the storing and processing of your
-            personal data in accordance with this policy.
-          </p>
-        </article>
+            <h2 className="mono">Who else sees it</h2>
+            <p>
+              Two services handle the message on its way to us: Resend delivers the email, and
+              Vercel hosts the site and keeps standard server logs. Neither is given the data
+              for their own purposes.
+            </p>
+
+            <h2 className="mono">Cookies and analytics</h2>
+            <p>
+              This site sets no advertising or tracking cookies of its own.
+            </p>
+
+            <h2 className="mono">How long we keep it</h2>
+            <p>
+              Your message stays in our email the way any other email does. Ask us to delete it
+              and we will.
+            </p>
+
+            <h2 className="mono">Your choices</h2>
+            <p>
+              Write to{' '}
+              <a href={`mailto:${site.email}`}>
+                {site.email}
+              </a>{' '}
+              to see what we hold about you, correct it, or have it deleted.
+            </p>
+
+            <h2 className="mono">Changes</h2>
+            <p>
+              If this policy changes, the date at the top changes with it.
+            </p>
+          </div>
+        </div>
       </main>
       <Footer />
     </>

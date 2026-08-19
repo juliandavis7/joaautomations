@@ -1,81 +1,93 @@
 'use client'
 
-import { useState, type ComponentType, type SVGProps } from 'react'
-import { Filter, GitBranch, CalendarDays, Mail, PhoneCall, Plug } from 'lucide-react'
+import { useRef, useState } from 'react'
+import { services } from '@/content/site'
+import Eyebrow from './Eyebrow'
+import { isMarker } from './FillIn'
 
-type IconType = ComponentType<SVGProps<SVGSVGElement>>
+type Peek = { index: number; x: number; y: number; tilt: number } | null
 
-const SERVICES: { eyebrow: string; title: string; body: string; Icon: IconType }[] = [
-  { eyebrow: 'AI Receptionist', title: 'Never miss a call again', body: '24/7 AI voice agent that answers, qualifies, books appointments, and routes urgent calls to your team. Sounds human, works while you sleep.', Icon: PhoneCall },
-  { eyebrow: 'Calendar & Scheduling', title: 'Booking that actually books', body: 'Embed your GHL calendar anywhere. Reminders, confirmations, and no-show follow-ups go out automatically.', Icon: CalendarDays },
-  { eyebrow: 'CRM Automation', title: 'Your pipeline runs itself', body: 'Auto-create contacts, assign owners, trigger follow-up sequences, and update deal stages, all without manual data entry.', Icon: GitBranch },
-  { eyebrow: 'Email & SMS Sequences', title: 'Follow up while you sleep', body: 'Multi-step nurture sequences triggered by behavior like a new lead, a no-show, or a closed deal, delivered at the right time.', Icon: Mail },
-  { eyebrow: 'Lead Generation', title: 'Capture & qualify leads automatically', body: 'Every form submission, ad click, or chatbot interaction flows straight into your CRM, enriched, tagged, and ready for follow-up.', Icon: Filter },
-  { eyebrow: 'Custom Integrations', title: 'Connect any stack you use', body: 'GHL, HubSpot, Zapier, Make, Airtable, Google Sheets, Slack: we wire it all together and maintain it for you.', Icon: Plug },
-]
-
-function ServiceCard({ eyebrow, title, body, Icon }: { eyebrow: string; title: string; body: string; Icon: IconType }) {
-  const [hovered, setHovered] = useState(false)
-  return (
-    <div
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: '#fff', border: '1px solid #E8ECF0', borderRadius: 10, padding: '28px 24px',
-        boxShadow: hovered ? '0 8px 28px rgba(76,135,219,0.16)' : '0 2px 8px rgba(0,0,0,0.05)',
-        transform: hovered ? 'translateY(-3px)' : 'translateY(0)',
-        transition: 'all 220ms cubic-bezier(0.16,1,0.3,1)',
-      }}
-    >
-      <div style={{
-        width: 40, height: 40, background: hovered ? '#6EA1EA' : '#E8F4FA',
-        borderRadius: 10, marginBottom: 16, transition: 'background 220ms',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-      }}>
-        <Icon
-          width={20}
-          height={20}
-          strokeWidth={2}
-          color={hovered ? '#ffffff' : '#4C87DB'}
-          style={{ transition: 'color 220ms' }}
-          aria-hidden="true"
-        />
-      </div>
-      <div style={{
-        fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600,
-        letterSpacing: '0.09em', textTransform: 'uppercase', color: '#4C87DB', marginBottom: 8,
-      }}>
-        {eyebrow}
-      </div>
-      <h3 style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 16, fontWeight: 700, color: '#0D1F35', lineHeight: 1.3, marginBottom: 10 }}>{title}</h3>
-      <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, color: '#4A5568', lineHeight: 1.6 }}>{body}</p>
-    </div>
-  )
-}
-
+/**
+ * Three plain words at display size. No cards, no icons, no grid.
+ *
+ * This is the page's one playful moment, and it is designed twice rather
+ * than once with a fallback (docs/design-principles.md §6):
+ *
+ *  - pointer: fine  — the still follows the cursor while a word is hovered
+ *  - pointer: coarse — the still springs in near the tapped word with a
+ *    slight random tilt, and the prompt copy itself reads "tap me"
+ *
+ * Deliberately not the reference's wipe-fill/attr(data-label) trick: ours
+ * reveals the work, theirs recolors the word.
+ */
 export default function ServicesSection() {
+  const [peek, setPeek] = useState<Peek>(null)
+  const listRef = useRef<HTMLUListElement>(null)
+
+  const place = (index: number, clientX: number, clientY: number, tilt: number) => {
+    const box = listRef.current?.getBoundingClientRect()
+    if (!box) return
+    setPeek({ index, x: clientX - box.left, y: clientY - box.top, tilt })
+  }
+
   return (
-    <section id="services" className="px-5 py-16 sm:px-8 md:px-10 md:py-24" style={{ background: '#F4F6F8' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: 56 }}>
-          <div style={{
-            fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600,
-            letterSpacing: '0.1em', textTransform: 'uppercase', color: '#4C87DB', marginBottom: 12,
-          }}>
-            What we do
-          </div>
-          <h2 style={{
-            fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: 'clamp(28px, 6vw, 38px)', fontWeight: 800,
-            color: '#0D1F35', lineHeight: 1.15, letterSpacing: '-0.02em', marginBottom: 16,
-          }}>
-            Everything automated. Nothing missed.
-          </h2>
-          <p style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 17, color: '#4A5568', maxWidth: 520, margin: '0 auto', lineHeight: 1.6 }}>
-            We build and maintain the workflows so your team can focus on the work that actually matters.
+    <section id="services" className="container section" aria-label="Services">
+      <div className="max-w-ct mx-auto">
+        <Eyebrow>Services</Eyebrow>
+
+        <div className="services">
+          <ul className="services__list" ref={listRef}>
+            {services.map((service, index) => (
+              <li key={service.name}>
+                <button
+                  type="button"
+                  className="services__word display"
+                  aria-expanded={peek?.index === index}
+                  onPointerMove={(e) => {
+                    if (e.pointerType !== 'mouse') return
+                    place(index, e.clientX, e.clientY, 0)
+                  }}
+                  onPointerLeave={(e) => {
+                    if (e.pointerType !== 'mouse') return
+                    setPeek(null)
+                  }}
+                  onClick={(e) => {
+                    if (peek?.index === index) {
+                      setPeek(null)
+                      return
+                    }
+                    const r = e.currentTarget.getBoundingClientRect()
+                    place(index, r.left + r.width * 0.5, r.top + r.height, (index % 2 ? 1 : -1) * (3 + index))
+                  }}
+                >
+                  {service.name}
+                </button>
+              </li>
+            ))}
+          </ul>
+
+          {peek !== null ? (
+            <div
+              className="services__peek"
+              style={{
+                left: peek.x,
+                top: peek.y,
+                ['--tilt' as string]: `${peek.tilt}deg`,
+              }}
+              aria-hidden="true"
+            >
+              {isMarker(services[peek.index].image) ? (
+                <span className="services__peek-marker mono">{services[peek.index].image}</span>
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={services[peek.index].image} alt="" width={360} height={270} />
+              )}
+            </div>
+          ) : null}
+
+          <p className="services__hint mono" aria-hidden="true">
+            <span className="services__hint-hover">hover me</span>
           </p>
-        </div>
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((s) => <ServiceCard key={s.eyebrow} {...s} />)}
         </div>
       </div>
     </section>

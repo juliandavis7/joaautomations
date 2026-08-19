@@ -1,68 +1,73 @@
-import type { Metadata } from 'next'
-import { Plus_Jakarta_Sans, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+import { fontClassName } from './fonts'
+import { site } from '@/content/site'
 import './globals.css'
 
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800'],
-  variable: '--font-plus-jakarta',
-  display: 'swap',
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-dm-sans',
-  display: 'swap',
-})
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-jetbrains',
-  display: 'swap',
-})
-
 export const metadata: Metadata = {
-  metadataBase: new URL('https://joaautomations.com'),
-  title: 'JOA Automations: Custom AI workflows for small business',
-  description:
-    'Boutique AI automation agency. Custom workflows and websites that handle your busywork, fully built, tested, and maintained.',
+  metadataBase: new URL(site.url),
+  title: site.tagline,
+  description: site.tagline,
   openGraph: {
-    title: 'JOA Automations: Custom AI workflows for small business',
-    description:
-      'Boutique AI automation agency. Custom workflows and websites that handle your busywork, fully built, tested, and maintained.',
-    url: 'https://joaautomations.com',
-    siteName: 'JOA Automations',
-    images: [
-      {
-        url: '/og.png',
-        width: 1200,
-        height: 630,
-        alt: 'JOA Automations',
-      },
-    ],
+    title: site.tagline,
+    description: site.tagline,
+    url: site.url,
+    siteName: site.wordmark,
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: site.tagline }],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'JOA Automations: Custom AI workflows for small business',
-    description:
-      'Boutique AI automation agency. Custom workflows and websites that handle your busywork, fully built, tested, and maintained.',
+    title: site.tagline,
+    description: site.tagline,
     images: ['/og.png'],
   },
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${site.url}#org`,
+      name: site.wordmark,
+      url: site.url,
+      email: site.email,
+    },
+    {
+      '@type': 'ProfessionalService',
+      '@id': `${site.url}#service`,
+      name: site.wordmark,
+      url: site.url,
+      email: site.email,
+      description: site.tagline,
+      parentOrganization: { '@id': `${site.url}#org` },
+    },
+  ],
+}
+
+/**
+ * Pre-paint navigation-type flag. Reads the navigation entry and stamps a
+ * class before the first paint so a reload does not replay the intro.
+ * Cheap, and it fixes a real flash (docs/design-principles.md §8).
+ */
+const prePaint = `(function(){try{var n=performance.getEntriesByType('navigation')[0];if(n&&n.type!=='navigate'){document.documentElement.classList.add('is-repeat-nav')}}catch(e){}})();`
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${plusJakarta.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang="en" className={fontClassName}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: prePaint }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   )
