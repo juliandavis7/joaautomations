@@ -13,6 +13,15 @@
   --paper: #FAFAF8;
   --ink: #111110;
   --accent: #3A3A37;
+  /* Text-safe cut of the accent. The accent proper is for rules, fills and
+     borders; anything that colors actual words uses this and has to clear
+     4.5:1 against --paper. B's acid green never colors text, so B points
+     this straight back at its ink. */
+  --accent-ink: #3A3A37;
+
+  /* Work cards sit on the ground by default. C gives them a surface. */
+  --card-bg: transparent;
+  --card-pad: 0px;
 
   /* Faces come from next/font in app/fonts.ts. A fork swaps the
      imports there and leaves these aliases alone. */
@@ -304,6 +313,8 @@ a:focus-visible > .arrow {
   display: flex;
   flex-direction: column;
   gap: 36px;
+  background: var(--card-bg);
+  padding-inline: var(--card-pad);
   padding-block: 36px;
   border-top: 1px solid var(--line);
   border-radius: var(--media-radius);
@@ -415,7 +426,7 @@ a:focus-visible > .arrow {
 
 .services__word:hover,
 .services__word[aria-expanded='true'] {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .services__peek {
@@ -543,7 +554,7 @@ a:focus-visible > .arrow {
   border-bottom: 1px solid var(--accent);
   padding: 0 0 4px;
   cursor: pointer;
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 .form__submit:disabled {
@@ -557,7 +568,7 @@ a:focus-visible > .arrow {
 }
 
 .form__status[data-state='error'] {
-  color: var(--accent);
+  color: var(--accent-ink);
 }
 
 /* ---------- footer ---------- */

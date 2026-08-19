@@ -10,7 +10,7 @@ export default function Eyebrow({ children }: { children: string }) {
       <span className="eyebrow__bracket" aria-hidden="true">
         [
       </span>
-      <span>{children}</span>
+      <span className="eyebrow__label">{children}</span>
       <span className="eyebrow__bracket" aria-hidden="true">
         ]
       </span>
