@@ -141,7 +141,7 @@ const main = async () => {
     await evaluate(`(() => {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-in'))
       const s = document.createElement('style')
-      s.textContent = '.reveal{opacity:1 !important;transform:none !important;transition:none !important}'
+      s.textContent = '.reveal{opacity:1 !important;transform:none !important;clip-path:none !important;transition:none !important}'
       document.head.appendChild(s)
     })()`)
     const { data } = await S('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true })
