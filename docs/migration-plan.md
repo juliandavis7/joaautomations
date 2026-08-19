@@ -3,9 +3,9 @@
 Phase 0 output. Inventory verified against the working tree on 2026-08-19; runtime
 findings verified against a local dev server.
 
-**Decisions locked 2026-08-19** in a Q&A pass. This file is the runbook. Where it
-conflicts with `brief.md` or `fill-ins.md`, this file wins for structure; leftover
-copy facts still go in `[FILL IN]` markers.
+**Decisions locked 2026-08-19** in a Q&A pass. This file is the runbook. `brief.md`,
+`design-principles.md`, and `fill-ins.md` are aligned to it. Leftover copy facts
+stay as `[FILL IN]` markers; they do not block the run.
 
 ---
 
