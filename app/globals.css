@@ -325,7 +325,7 @@ a:focus-visible > .arrow {
 
 .work-card__client {
   margin-top: 20px;
-  opacity: 0.6;
+  opacity: 0.68;
 }
 
 .work-card__story {
@@ -342,7 +342,7 @@ a:focus-visible > .arrow {
 
 .work-card__quote figcaption {
   margin-top: 18px;
-  opacity: 0.6;
+  opacity: 0.68;
 }
 
 .cs-meta {
@@ -357,10 +357,12 @@ a:focus-visible > .arrow {
   align-items: baseline;
 }
 
+/* 0.5 read better but lands at 3.95:1 for pure black on white, which is
+   what direction B is. 0.65 is the floor that clears 4.5:1 everywhere. */
 .cs-row dt {
   flex: 0 0 auto;
   min-width: 9ch;
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .cs-row dd {
@@ -478,7 +480,7 @@ a:focus-visible > .arrow {
 
 .services__hint {
   margin-top: 40px;
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 /* Touch gets a different prompt, not the same prompt in a smaller size.
@@ -510,7 +512,7 @@ a:focus-visible > .arrow {
 }
 
 .form__row label {
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .form input,
@@ -593,7 +595,7 @@ a:focus-visible > .arrow {
   margin-top: 60px;
   display: flex;
   gap: 24px;
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 /* ---------- legal page ---------- */
@@ -604,7 +606,7 @@ a:focus-visible > .arrow {
 
 .legal__updated {
   margin-top: 24px;
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .legal__body {
@@ -616,7 +618,7 @@ a:focus-visible > .arrow {
 
 .legal__body h2 {
   margin-top: 48px;
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .legal__body p {
