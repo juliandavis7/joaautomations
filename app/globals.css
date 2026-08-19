@@ -29,6 +29,11 @@
   --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, monospace;
 
   --hero-poster: url('/hero-poster.jpg');
+  /* All three stills are light-ground compositions, so the bar stays ink
+     over the hero. A direction that lands dark footage in Task B flips
+     this one value and gets the scrim with it. */
+  --nav-over-hero: var(--ink);
+  --hero-scrim: transparent;
 
   /* Flat. The weight in this direction comes from the ruled grid, not shadow. */
   --media-shadow: none;
@@ -269,14 +274,14 @@ a:focus-visible > .arrow {
   background-position: 50% 30%;
 }
 
-/* Scrim behind the fixed bar so white nav type always clears contrast,
-   whatever the still underneath is doing. */
+/* Scrim behind the fixed bar, so that a direction running dark footage can
+   keep white nav type at contrast. Transparent while the stills are light. */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0 0 auto 0;
   height: 220px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), transparent);
+  background: linear-gradient(to bottom, var(--hero-scrim), transparent);
 }
 
 /* ---------- nav ---------- */
@@ -296,10 +301,10 @@ a:focus-visible > .arrow {
   transition: transform 300ms ease, opacity 300ms ease, color 300ms ease;
 }
 
-/* Over the hero still the bar sits on a dark scrim, so it inverts.
+/* Over the hero still the bar takes the direction's hero colour.
    Deterministic instead of mix-blend-mode, which we cannot contrast-check. */
 .nav[data-over-hero='true'] {
-  color: #fff;
+  color: var(--nav-over-hero);
 }
 
 .nav[data-hidden='true'] {

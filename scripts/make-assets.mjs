@@ -83,45 +83,121 @@ copyFileSync(shot(og, { width: 1200, height: 630, out: 'og' }), 'public/og.png')
 
 /* ---------------- hero still ---------------- */
 
-const heroTreatments = {
-  // A — drafting table: warm paper, ruled grid, a pencil-weight diagonal
-  ruled: `
-    background:${DIRECTION.paper};
-    background-image:
-      linear-gradient(${DIRECTION.ink}12 1px, transparent 1px),
-      linear-gradient(90deg, ${DIRECTION.ink}12 1px, transparent 1px),
-      radial-gradient(120% 90% at 22% 18%, ${DIRECTION.accent}26, transparent 62%);
-    background-size: 46px 46px, 46px 46px, 100% 100%;`,
-  // B — signal: white ground, hard horizontal scan bands, one acid moment
-  scan: `
-    background:${DIRECTION.paper};
-    background-image:
-      repeating-linear-gradient(180deg, ${DIRECTION.ink}0d 0 2px, transparent 2px 12px),
-      linear-gradient(100deg, transparent 46%, ${DIRECTION.accent}5c 46%, ${DIRECTION.accent}5c 49%, transparent 49%);`,
-  // C — long shadow: soft depth, one large slab casting a real shadow
-  depth: `
-    background:${DIRECTION.paper};`,
-  plain: `
-    background:${DIRECTION.paper};
-    background-image: radial-gradient(90% 70% at 30% 20%, ${DIRECTION.accent}2e, transparent 70%);`,
-}
+/**
+ * Atmosphere, not a photograph. Each treatment is drawn from the
+ * direction's own vocabulary rather than borrowed from a stock library —
+ * we are not putting people we have never met on a page that says two
+ * people built it. Replaced by real footage in each fork when it exists
+ * (docs/fill-ins.md #26).
+ */
+const A = DIRECTION.accent
+const I = DIRECTION.ink
+const P = DIRECTION.paper
 
-const slab =
-  DIRECTION.hero === 'depth'
-    ? `<div style="position:absolute;left:14%;top:16%;width:46%;height:62%;background:${DIRECTION.accent};box-shadow:0 80px 120px -40px ${DIRECTION.ink}59;"></div>
-       <div style="position:absolute;left:52%;top:38%;width:34%;height:44%;background:${DIRECTION.paper};box-shadow:0 60px 100px -30px ${DIRECTION.ink}45;"></div>`
-    : ''
+const stages = {
+  // A — drafting table: a ruled surface with a compass sweep and dimension marks
+  ruled: `
+    <div class="stage" style="background:${P}">
+      <div style="position:absolute;inset:0;
+        background-image:
+          linear-gradient(${I}0f 1px, transparent 1px),
+          linear-gradient(90deg, ${I}0f 1px, transparent 1px),
+          linear-gradient(${I}1c 1px, transparent 1px),
+          linear-gradient(90deg, ${I}1c 1px, transparent 1px);
+        background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px;"></div>
+
+      <svg viewBox="0 0 1600 1000" style="position:absolute;inset:0;width:100%;height:100%">
+        <g fill="none" stroke="${A}" stroke-width="2">
+          <circle cx="1180" cy="500" r="430" opacity="0.5"/>
+          <circle cx="1180" cy="500" r="300" opacity="0.28"/>
+          <path d="M1180 70 L1180 930" opacity="0.22"/>
+          <path d="M750 500 L1610 500" opacity="0.22"/>
+        </g>
+        <g fill="none" stroke="${I}" stroke-width="1.5" opacity="0.5">
+          <path d="M200 760 L640 300"/>
+          <path d="M200 300 L640 760"/>
+          <path d="M200 300 L640 300 L640 760 L200 760 Z"/>
+        </g>
+        <g fill="none" stroke="${I}" stroke-width="1.5" opacity="0.65">
+          <path d="M200 840 L640 840"/>
+          <path d="M200 828 L200 852"/>
+          <path d="M640 828 L640 852"/>
+          <path d="M120 300 L120 760"/>
+          <path d="M108 300 L132 300"/>
+          <path d="M108 760 L132 760"/>
+        </g>
+        <g fill="none" stroke="${I}" stroke-width="2" opacity="0.8">
+          <path d="M60 60 L60 130 M60 60 L130 60"/>
+          <path d="M1540 940 L1540 870 M1540 940 L1470 940"/>
+        </g>
+        <g fill="${A}" opacity="0.9">
+          <circle cx="1180" cy="500" r="7"/>
+          <circle cx="200" cy="300" r="5"/>
+          <circle cx="640" cy="760" r="5"/>
+        </g>
+      </svg>
+    </div>`,
+
+  // B — signal: our own work being scrolled, abstracted to bars and one acid moment
+  scan: `
+    <div class="stage" style="background:${P}">
+      <svg viewBox="0 0 1600 1000" style="position:absolute;inset:0;width:100%;height:100%">
+        <g fill="${I}">
+          <rect x="180" y="120" width="520" height="34"/>
+          <rect x="180" y="196" width="880" height="34"/>
+          <rect x="180" y="272" width="640" height="34"/>
+          <rect x="180" y="420" width="300" height="220"/>
+          <rect x="520" y="420" width="300" height="220"/>
+          <rect x="180" y="700" width="410" height="20"/>
+          <rect x="180" y="748" width="640" height="20"/>
+          <rect x="180" y="796" width="290" height="20"/>
+        </g>
+        <g fill="${A}">
+          <rect x="860" y="420" width="300" height="220"/>
+          <rect x="180" y="880" width="180" height="20"/>
+        </g>
+        <g fill="none" stroke="${A}" stroke-width="4">
+          <path d="M0 660 L1600 660"/>
+        </g>
+        <g fill="${I}" opacity="0.18">
+          <rect x="1240" y="120" width="180" height="34"/>
+          <rect x="1240" y="196" width="240" height="34"/>
+        </g>
+      </svg>
+      <div style="position:absolute;inset:0;
+        background-image: repeating-linear-gradient(180deg, ${I}12 0 2px, transparent 2px 9px);"></div>
+    </div>`,
+
+  // C — long shadow: slabs with real weight
+  depth: `
+    <div class="stage" style="background:${P}">
+      <div style="position:absolute;left:9%;top:14%;width:44%;height:64%;background:${A};
+        box-shadow:0 90px 140px -50px ${I}66, 0 20px 40px -20px ${I}33;"></div>
+      <div style="position:absolute;left:44%;top:32%;width:30%;height:48%;background:#FFFFFF;
+        box-shadow:0 70px 110px -40px ${I}59, 0 14px 30px -16px ${I}2b;"></div>
+      <div style="position:absolute;left:70%;top:20%;width:22%;height:34%;background:${I};
+        box-shadow:0 60px 100px -40px ${I}59;"></div>
+      <div style="position:absolute;left:66%;top:66%;width:26%;height:18%;background:#FFFFFF;
+        box-shadow:0 40px 70px -30px ${I}4d;"></div>
+    </div>`,
+
+  plain: `
+    <div class="stage" style="background:${P};
+      background-image: radial-gradient(90% 70% at 30% 20%, ${A}2e, transparent 70%);"></div>`,
+}
 
 const hero = `<!doctype html><meta charset="utf-8">
 <style>
   html,body{margin:0;padding:0;width:1600px;height:1000px;overflow:hidden}
-  .stage{position:relative;width:1600px;height:1000px;${heroTreatments[DIRECTION.hero] ?? heroTreatments.plain}}
+  .stage{position:relative;width:1600px;height:1000px;overflow:hidden}
   /* film grain so the still does not read as a flat CSS rectangle */
-  .grain{position:absolute;inset:0;opacity:.16;mix-blend-mode:multiply;
+  .grain{position:absolute;inset:0;opacity:.14;mix-blend-mode:multiply;pointer-events:none;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.55'/></svg>");}
-  .vig{position:absolute;inset:0;background:radial-gradient(120% 100% at 50% 40%, transparent 40%, ${DIRECTION.ink}3d 100%)}
+  .vig{position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(130% 110% at 50% 38%, transparent 45%, ${I}26 100%)}
 </style>
-<div class="stage">${slab}<div class="grain"></div><div class="vig"></div></div>`
+${stages[DIRECTION.hero] ?? stages.plain}
+<div class="grain"></div><div class="vig"></div>`
 
 const heroPng = shot(hero, { width: 1600, height: 1000, out: 'hero' })
 execFileSync('sips', ['-s', 'format', 'jpeg', '-s', 'formatOptions', '72', heroPng, '--out', 'public/hero-poster.jpg'], {
