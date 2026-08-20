@@ -119,7 +119,6 @@
 }
 
 .work-card__link,
-.footer__email,
 .legal__body a {
   border-bottom-color: color-mix(in srgb, var(--accent) 45%, transparent);
 }
