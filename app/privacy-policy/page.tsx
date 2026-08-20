@@ -17,7 +17,7 @@ export default function PrivacyPolicy() {
   return (
     <>
       <NavBar />
-      <main id="top" className="container section legal">
+      <main id="top" className="shell section legal">
         <div className="max-w-ct mx-auto">
           <h1 className="display">Privacy</h1>
           <p className="mono legal__updated">Last updated 19 August 2026</p>
@@ -77,7 +77,9 @@ export default function PrivacyPolicy() {
           </div>
         </div>
       </main>
-      <Footer />
+      <div className="on-dark">
+        <Footer />
+      </div>
     </>
   )
 }

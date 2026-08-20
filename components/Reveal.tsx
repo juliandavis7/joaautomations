@@ -13,9 +13,12 @@ import { useEffect, useRef } from 'react'
 export default function Reveal({
   children,
   className = '',
+  delay = 0,
 }: {
   children: React.ReactNode
   className?: string
+  /** ms. Use small offsets to stagger siblings; never enough to feel slow. */
+  delay?: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -35,14 +38,18 @@ export default function Reveal({
           }
         }
       },
-      { rootMargin: '0px 0px -10% 0px' }
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
     )
     io.observe(el)
     return () => io.disconnect()
   }, [])
 
   return (
-    <div ref={ref} className={`reveal ${className}`}>
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      style={delay ? ({ ['--reveal-delay']: `${delay}ms` } as React.CSSProperties) : undefined}
+    >
       {children}
     </div>
   )
