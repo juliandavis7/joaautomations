@@ -186,11 +186,16 @@ const main = async () => {
     h1: [...document.querySelectorAll('h1')].length,
     h2: [...document.querySelectorAll('h2')].length,
     h3: [...document.querySelectorAll('h3')].length,
-    navLinks: [...document.querySelectorAll('.nav nav a')].map(a => a.textContent.trim()),
+    navLinks: [...document.querySelectorAll('.nav__cluster a')].map(a => a.textContent.trim()),
     terms: !!document.querySelector('footer a[href*="terms" i]'),
     anchors: ['work','contact'].map(id => !!document.getElementById(id)),
     video: document.querySelectorAll('video').length,
     ghl: document.body.innerHTML.includes('msgsndr') || !!document.querySelector('iframe'),
+    plates: document.querySelectorAll('.work-card__plate').length,
+    band: !!document.querySelector('.hero-band'),
+    cluster: !!document.querySelector('.nav__cluster'),
+    footerWordmark: (document.querySelector('.footer__wordmark')?.textContent ?? '').trim(),
+    darkBlocks: document.querySelectorAll('.on-dark').length,
     text: document.body.innerText,
   }))()`)
 
@@ -215,6 +220,19 @@ const main = async () => {
   structure.terms ? fail('footer has no Terms link') : pass('footer has no Terms link')
   structure.anchors.every(Boolean) ? pass('#work and #contact exist') : fail('#work and #contact exist')
   structure.ghl ? fail('no GHL iframe survives') : pass('no GHL iframe survives')
+
+  structure.plates === 3
+    ? pass('each Work card carries its ramp plate')
+    : fail('work plates', String(structure.plates))
+  structure.band && structure.cluster
+    ? pass('hero band and frosted nav cluster are present')
+    : fail('hero band / nav cluster', JSON.stringify({ band: structure.band, cluster: structure.cluster }))
+  structure.footerWordmark === 'JOA'
+    ? pass('footer carries the giant wordmark')
+    : fail('footer wordmark', structure.footerWordmark)
+  structure.darkBlocks >= 1
+    ? pass('page runs a dark ground as well as paper', `${structure.darkBlocks} dark blocks`)
+    : fail('dark ground missing')
 
   /* ---- 7. copy ---- */
   const banned = [
@@ -271,8 +289,11 @@ const main = async () => {
     }
     return out
   })()`)
-  Math.abs(anchorLanding.work) < 90 && Math.abs(anchorLanding.contact) < 90
-    ? pass('Work and Contact anchors land')
+  /* The sections carry scroll-margin-top so they clear the fixed bar, so
+     "landed" means just below it, not flush with the viewport top. */
+  const landed = (v) => v >= -4 && v <= 150
+  landed(anchorLanding.work) && landed(anchorLanding.contact)
+    ? pass('Work and Contact anchors land clear of the fixed bar', JSON.stringify(anchorLanding))
     : fail('anchors land', JSON.stringify(anchorLanding))
 
   /* ---- services hover/tap moment ---- */
@@ -287,6 +308,40 @@ const main = async () => {
   peek.shown && peek.hidden
     ? pass('services tap reveals and dismisses the still')
     : fail('services tap moment', JSON.stringify(peek))
+
+  /* ---- contact modal ---- */
+  const modal = await evaluate(`(async () => {
+    const wait = (ms) => new Promise(r => setTimeout(r, ms))
+    const el = document.querySelector('.modal')
+    const trigger = document.querySelector('.ethos__cta')
+    const closedInert = el.hasAttribute('inert')
+    trigger.click(); await wait(600)
+    const open = el.dataset.open === 'true'
+    const focused = document.activeElement && document.activeElement.closest('.modal__card') !== null
+    const openInert = el.hasAttribute('inert')
+    const locked = getComputedStyle(document.documentElement).overflow === 'hidden'
+    document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+    await wait(600)
+    const closed = el.dataset.open !== 'true'
+    const unlocked = getComputedStyle(document.documentElement).overflow !== 'hidden'
+    // and the overlay closes it too
+    trigger.click(); await wait(400)
+    document.querySelector('.modal__overlay').click(); await wait(500)
+    const closedByOverlay = el.dataset.open !== 'true'
+    return { closedInert, open, focused, openInert, locked, closed, unlocked, closedByOverlay }
+  })()`)
+  modal.closedInert && !modal.openInert
+    ? pass('modal is inert when closed, live when open')
+    : fail('modal inert handling', JSON.stringify(modal))
+  modal.open && modal.focused
+    ? pass('modal opens and moves focus into the card')
+    : fail('modal open/focus', JSON.stringify(modal))
+  modal.locked && modal.unlocked
+    ? pass('modal locks and restores page scroll')
+    : fail('modal scroll lock', JSON.stringify(modal))
+  modal.closed && modal.closedByOverlay
+    ? pass('Escape and the overlay both close the modal')
+    : fail('modal close paths', JSON.stringify(modal))
 
   /* ---- 4. console + assets ---- */
   consoleErrors.length ? fail('console has no errors', consoleErrors.slice(0, 3).join(' | ')) : pass('console has no errors')
@@ -309,6 +364,8 @@ const main = async () => {
       poster: cs.backgroundImage !== 'none',
       videos: document.querySelectorAll('video').length,
       revealOpacity: reveal ? getComputedStyle(reveal).opacity : '1',
+      heroOpacity: cs.opacity,
+      wordmarkShift: getComputedStyle(document.querySelector('.footer__wordmark span')).transform,
       navTransition: getComputedStyle(document.querySelector('.nav')).transitionDuration,
     }
   })()`)
@@ -323,6 +380,14 @@ const main = async () => {
   reduced.navTransition === '0s'
     ? pass('reduced motion: nav transition disabled')
     : fail('reduced motion: nav transition', reduced.navTransition)
+  reduced.heroOpacity === '1'
+    ? pass('reduced motion: hero is not hidden behind a curtain raise')
+    : fail('reduced motion: hero opacity', reduced.heroOpacity)
+  // leading semicolon: the previous line is an expression and this one opens
+  // with [ , which ASI would otherwise splice into it as an index
+  ;['none', 'matrix(1, 0, 0, 1, 0, 0)'].includes(reduced.wordmarkShift)
+    ? pass('reduced motion: footer wordmark sits still')
+    : fail('reduced motion: footer wordmark', reduced.wordmarkShift)
 
   /* ---- form UI states ---- */
   await S('Emulation.setEmulatedMedia', { features: [] })
