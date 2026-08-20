@@ -1,15 +1,61 @@
-import { site } from '@/content/site'
+'use client'
 
-/** Wordmark, email, one legal row. No video. No Terms link. */
+import { useEffect, useRef } from 'react'
+import { site } from '@/content/site'
+import { openContactModal } from './ContactModal'
+
+/**
+ * The last thing on the page, and it is supposed to land: the wordmark set
+ * as large as the column allows, sliding up from its own baseline as the
+ * footer enters view. Two pills above it, a quiet legal row below.
+ *
+ * No footer video and no Terms link — both locked in docs/migration-plan.md.
+ */
 export default function Footer() {
+  const wordmark = useRef<HTMLParagraphElement>(null)
+
+  useEffect(() => {
+    const el = wordmark.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.classList.add('is-in')
+      return
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in')
+            io.unobserve(entry.target)
+          }
+        }
+      },
+      { threshold: 0.3 }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
   return (
-    <footer className="container footer">
-      <div className="max-w-ct mx-auto footer__inner">
-        <p className="display footer__wordmark">{site.wordmark}</p>
-        <a className="body footer__email" href={`mailto:${site.email}`}>
-          {site.email}
-        </a>
-        <p className="mono footer__legal">
+    <footer className="shell footer">
+      <div className="max-w-ct mx-auto">
+        <div className="footer__pills">
+          <a className="pill" href={`mailto:${site.email}`}>
+            {site.email}
+          </a>
+          <button className="pill" type="button" onClick={openContactModal}>
+            Start a project
+            <span className="arrow ml-2" aria-hidden="true">
+              &#8599;
+            </span>
+          </button>
+        </div>
+
+        <p className="footer__wordmark" ref={wordmark}>
+          <span>{site.wordmark}</span>
+        </p>
+
+        <p className="footer__legal">
           <span>&copy; {new Date().getFullYear()} JOA</span>
           <a href="/privacy-policy">Privacy</a>
         </p>

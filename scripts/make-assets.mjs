@@ -30,6 +30,9 @@ const DIRECTION = {
   // JPEG quality for the hero still. The still is the LCP candidate behind
   // the fold-height hero, so bytes here move the mobile score directly.
   quality: process.env.JOA_JPEG_Q ?? '62',
+  // The hero ground. The page opens dark and dissolves into paper below,
+  // so the still is composed on this rather than on --paper.
+  dark: process.env.JOA_DARK ?? '#17171A',
 }
 
 const CHROME = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
@@ -96,32 +99,33 @@ copyFileSync(shot(og, { width: 1200, height: 630, out: 'og' }), 'public/og.png')
 const A = DIRECTION.accent
 const I = DIRECTION.ink
 const P = DIRECTION.paper
+const D = DIRECTION.dark
 
 const stages = {
-  // A — drafting table: a ruled surface with a compass sweep and dimension marks
+  // A — drafting table, after hours: the ruled surface lit from one side
   ruled: `
-    <div class="stage" style="background:${P}">
+    <div class="stage" style="background:${D}">
       <div style="position:absolute;inset:0;
         background-image:
-          linear-gradient(${I}0f 1px, transparent 1px),
-          linear-gradient(90deg, ${I}0f 1px, transparent 1px),
-          linear-gradient(${I}1c 1px, transparent 1px),
-          linear-gradient(90deg, ${I}1c 1px, transparent 1px);
+          linear-gradient(#ffffff0a 1px, transparent 1px),
+          linear-gradient(90deg, #ffffff0a 1px, transparent 1px),
+          linear-gradient(#ffffff1a 1px, transparent 1px),
+          linear-gradient(90deg, #ffffff1a 1px, transparent 1px);
         background-size: 40px 40px, 40px 40px, 200px 200px, 200px 200px;"></div>
 
       <svg viewBox="0 0 1600 1000" style="position:absolute;inset:0;width:100%;height:100%">
-        <g fill="none" stroke="${A}" stroke-width="2">
-          <circle cx="1180" cy="500" r="430" opacity="0.5"/>
-          <circle cx="1180" cy="500" r="300" opacity="0.28"/>
-          <path d="M1180 70 L1180 930" opacity="0.22"/>
-          <path d="M750 500 L1610 500" opacity="0.22"/>
+        <g fill="none" stroke="${A}" stroke-width="2.5">
+          <circle cx="1180" cy="500" r="430" opacity="0.85"/>
+          <circle cx="1180" cy="500" r="300" opacity="0.45"/>
+          <path d="M1180 70 L1180 930" opacity="0.35"/>
+          <path d="M750 500 L1610 500" opacity="0.35"/>
         </g>
-        <g fill="none" stroke="${I}" stroke-width="1.5" opacity="0.5">
+        <g fill="none" stroke="#ffffff" stroke-width="1.6" opacity="0.55">
           <path d="M200 760 L640 300"/>
           <path d="M200 300 L640 760"/>
           <path d="M200 300 L640 300 L640 760 L200 760 Z"/>
         </g>
-        <g fill="none" stroke="${I}" stroke-width="1.5" opacity="0.65">
+        <g fill="none" stroke="#ffffff" stroke-width="1.4" opacity="0.4">
           <path d="M200 840 L640 840"/>
           <path d="M200 828 L200 852"/>
           <path d="M640 828 L640 852"/>
@@ -129,31 +133,33 @@ const stages = {
           <path d="M108 300 L132 300"/>
           <path d="M108 760 L132 760"/>
         </g>
-        <g fill="none" stroke="${I}" stroke-width="2" opacity="0.8">
+        <g fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5">
           <path d="M60 60 L60 130 M60 60 L130 60"/>
           <path d="M1540 940 L1540 870 M1540 940 L1470 940"/>
         </g>
-        <g fill="${A}" opacity="0.9">
-          <circle cx="1180" cy="500" r="7"/>
+        <g fill="${A}">
+          <circle cx="1180" cy="500" r="8"/>
           <circle cx="200" cy="300" r="5"/>
           <circle cx="640" cy="760" r="5"/>
         </g>
       </svg>
+      <div style="position:absolute;inset:0;
+        background: radial-gradient(80% 70% at 74% 44%, ${A}26, transparent 66%)"></div>
     </div>`,
 
-  // B — signal: our own work being scrolled, abstracted to bars and one acid moment
+  // B — signal: our own work being scrolled, abstracted, on a black screen
   scan: `
-    <div class="stage" style="background:${P}">
+    <div class="stage" style="background:${D}">
       <svg viewBox="0 0 1600 1000" style="position:absolute;inset:0;width:100%;height:100%">
-        <g fill="${I}">
+        <g fill="#ffffff">
           <rect x="180" y="120" width="520" height="34"/>
-          <rect x="180" y="196" width="880" height="34"/>
-          <rect x="180" y="272" width="640" height="34"/>
-          <rect x="180" y="420" width="300" height="220"/>
-          <rect x="520" y="420" width="300" height="220"/>
-          <rect x="180" y="700" width="410" height="20"/>
-          <rect x="180" y="748" width="640" height="20"/>
-          <rect x="180" y="796" width="290" height="20"/>
+          <rect x="180" y="196" width="880" height="34" opacity="0.7"/>
+          <rect x="180" y="272" width="640" height="34" opacity="0.4"/>
+          <rect x="180" y="420" width="300" height="220" opacity="0.16"/>
+          <rect x="520" y="420" width="300" height="220" opacity="0.16"/>
+          <rect x="180" y="700" width="410" height="20" opacity="0.5"/>
+          <rect x="180" y="748" width="640" height="20" opacity="0.32"/>
+          <rect x="180" y="796" width="290" height="20" opacity="0.32"/>
         </g>
         <g fill="${A}">
           <rect x="860" y="420" width="300" height="220"/>
@@ -162,31 +168,36 @@ const stages = {
         <g fill="none" stroke="${A}" stroke-width="4">
           <path d="M0 660 L1600 660"/>
         </g>
-        <g fill="${I}" opacity="0.18">
+        <g fill="#ffffff" opacity="0.1">
           <rect x="1240" y="120" width="180" height="34"/>
           <rect x="1240" y="196" width="240" height="34"/>
         </g>
       </svg>
       <div style="position:absolute;inset:0;
-        background-image: repeating-linear-gradient(180deg, ${I}12 0 2px, transparent 2px 9px);"></div>
+        background-image: repeating-linear-gradient(180deg, #ffffff14 0 2px, transparent 2px 9px);"></div>
+      <div style="position:absolute;inset:0;
+        background: radial-gradient(60% 50% at 63% 53%, ${A}2e, transparent 70%)"></div>
     </div>`,
 
-  // C — long shadow: slabs with real weight
+  // C — long shadow: slabs with real weight, lit from above
   depth: `
-    <div class="stage" style="background:${P}">
-      <div style="position:absolute;left:9%;top:14%;width:44%;height:64%;background:${A};
-        box-shadow:0 90px 140px -50px ${I}66, 0 20px 40px -20px ${I}33;"></div>
-      <div style="position:absolute;left:44%;top:32%;width:30%;height:48%;background:#FFFFFF;
-        box-shadow:0 70px 110px -40px ${I}59, 0 14px 30px -16px ${I}2b;"></div>
-      <div style="position:absolute;left:70%;top:20%;width:22%;height:34%;background:${I};
-        box-shadow:0 60px 100px -40px ${I}59;"></div>
-      <div style="position:absolute;left:66%;top:66%;width:26%;height:18%;background:#FFFFFF;
-        box-shadow:0 40px 70px -30px ${I}4d;"></div>
+    <div class="stage" style="background:${D}">
+      <div style="position:absolute;inset:0;
+        background: radial-gradient(90% 70% at 50% 0%, #ffffff14, transparent 70%)"></div>
+      <div style="position:absolute;left:9%;top:14%;width:44%;height:64%;background:${A};border-radius:8px;
+        box-shadow:0 90px 140px -50px #000000b3, 0 20px 40px -20px #00000080;"></div>
+      <div style="position:absolute;left:44%;top:32%;width:30%;height:48%;background:${P};border-radius:8px;
+        box-shadow:0 70px 110px -40px #000000a6, 0 14px 30px -16px #00000073;"></div>
+      <div style="position:absolute;left:70%;top:20%;width:22%;height:34%;background:#ffffff1f;border-radius:8px;
+        border:1px solid #ffffff2e;
+        box-shadow:0 60px 100px -40px #000000a6;"></div>
+      <div style="position:absolute;left:66%;top:66%;width:26%;height:18%;background:${P};border-radius:8px;
+        box-shadow:0 40px 70px -30px #00000099;"></div>
     </div>`,
 
   plain: `
-    <div class="stage" style="background:${P};
-      background-image: radial-gradient(90% 70% at 30% 20%, ${A}2e, transparent 70%);"></div>`,
+    <div class="stage" style="background:${D};
+      background-image: radial-gradient(90% 70% at 30% 20%, ${A}3d, transparent 70%);"></div>`,
 }
 
 const hero = `<!doctype html><meta charset="utf-8">
@@ -194,10 +205,10 @@ const hero = `<!doctype html><meta charset="utf-8">
   html,body{margin:0;padding:0;width:1600px;height:1000px;overflow:hidden}
   .stage{position:relative;width:1600px;height:1000px;overflow:hidden}
   /* film grain so the still does not read as a flat CSS rectangle */
-  .grain{position:absolute;inset:0;opacity:.14;mix-blend-mode:multiply;pointer-events:none;
+  .grain{position:absolute;inset:0;opacity:.10;mix-blend-mode:overlay;pointer-events:none;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.55'/></svg>");}
   .vig{position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(130% 110% at 50% 38%, transparent 45%, ${I}26 100%)}
+    background:radial-gradient(130% 110% at 50% 38%, transparent 40%, #00000073 100%)}
 </style>
 ${stages[DIRECTION.hero] ?? stages.plain}
 <div class="grain"></div><div class="vig"></div>`

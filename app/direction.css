@@ -1,0 +1,135 @@
+/* ============================================================
+   DIRECTION LAYER — this file is the whole fork surface.
+   app/globals.css is byte-identical across the three worktrees;
+   only this file and app/fonts.ts differ.
+   ============================================================ */
+:root {
+  /* Direction B — "Signal".
+     True white, true black, one acid green. The most confident of the three
+     and the cheapest to execute perfectly. The risk is that with one face
+     and no ornament, sloppy spacing is nakedly visible, so nothing here is
+     allowed to drift. */
+  --paper: #FFFFFF;
+  --ink: #000000;
+  --accent: #00E05A;          /* fills and rules only */
+  --accent-ink: #000000;      /* the green never colours text — it cannot clear 4.5:1 on white */
+
+  --dark: #000000;
+  --dark-2: #0B0B0B;
+  --on-dark: #FFFFFF;
+  --on-dark-muted: rgba(255, 255, 255, 0.6);
+  --on-dark-line: rgba(255, 255, 255, 0.22);
+
+  /* The ramp is signal strength, not hue: the plates go dark down the page
+     while the scanline over them tightens. Green stays where it was
+     budgeted — the service fill and the submit rule — rather than becoming
+     a third and fourth moment across three large panels. */
+  --ramp-1: #1C1C1C;
+  --ramp-2: #101010;
+  --ramp-3: #000000;
+
+  --card-bg: transparent;
+  --card-pad: 0px;
+
+  /* IBM Plex Sans and its own mono cut. Registered in app/fonts.ts. */
+  --font-display: var(--font-face-display), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-face-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --hero-poster: url('/hero-poster.jpg');
+
+  /* Flat and hard-edged. No shadow and no radius anywhere — that is the
+     discipline, and the moment a corner rounds it stops being B. */
+  --media-shadow: none;
+  --media-radius: 0px;
+  --radius-sm: 0px;
+  --radius-lg: 0px;
+  --radius-pill: 0px;
+
+  --plate-texture: repeating-linear-gradient(180deg, rgba(255,255,255,0.09) 0 2px, transparent 2px 9px);
+  --plate-size: auto;
+
+  --band-texture: repeating-linear-gradient(180deg, rgba(0,224,90,0.5) 0 2px, transparent 2px 10px);
+  --band-size: auto;
+
+  --wordmark-scale: 0.5;
+}
+
+/* ---------- direction B: brackets, hard cuts, two green moments ---------- */
+
+/* The ornament is the bracket, and there is no graphic at all. */
+.eyebrow__ornament { display: none; }
+.eyebrow__bracket { display: inline; opacity: 0.35; }
+.eyebrow { gap: 8px; }
+
+/* Motion is a hard cut: a clip-path wipe in four steps, so a section reads
+   as a switch thrown rather than something easing in. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 140ms steps(4, end);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-in { clip-path: inset(0 0 0 0); }
+}
+
+/* Rules are black hairlines. Green never runs the width of the page. */
+.work-card__quote { border-left: 3px solid var(--accent); }
+.cs-meta { border-top-color: color-mix(in srgb, var(--ink) 30%, transparent); }
+
+/* Green moment one: the service word takes a solid block. */
+.services__word {
+  position: relative;
+  isolation: isolate;
+  padding-inline: 6px;
+}
+
+.services__word::before {
+  content: '';
+  position: absolute;
+  inset: 0.1em 0 0.08em;
+  background: var(--accent);
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 140ms steps(4, end);
+  z-index: -1;
+}
+
+.services__word:hover::before,
+.services__word[aria-expanded='true']::before { clip-path: inset(0 0 0 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .services__word::before { transition: none; }
+}
+
+/* The peek is cut in from the top rather than sprung. */
+.services__peek {
+  border: 3px solid var(--accent);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .services__peek { animation: peek-cut 140ms steps(4, end) both; }
+}
+
+@keyframes peek-cut {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+/* Green moment two: the submit rule, and the field it is attached to. */
+.form__submit { border-width: 2px; border-color: var(--accent); }
+.form__submit:hover { background: var(--accent); color: var(--ink); }
+.on-dark .form__submit { border-color: var(--accent); color: var(--on-dark); }
+.on-dark .form__submit:hover { background: var(--accent); color: #000; }
+
+.form input:focus,
+.form textarea:focus,
+.form select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 224, 90, 0.25);
+}
+
+.work-card__link:hover { background: var(--ink); color: var(--paper); }
