@@ -210,3 +210,44 @@ is automation and not a website.
 **Services**: one still per service word (#25), ×3.
 
 Nothing was invented to fill any of these.
+
+---
+
+## The copy pass (2026-08-20)
+
+The three variants no longer ship placeholder copy. `docs/fill-ins.md` #1–#20,
+#24 and #27 are answered and written into `content/work.ts` and
+`content/site.ts`. Copy lives in the shared layer, so all three directions
+carry identical words — the bake-off still compares look, not content.
+
+**Both testimonials came off.** Karl Watson's described an AI phone
+receptionist; what was built for Humble is a website with Google Calendar
+booking. The quote would have claimed a product that never shipped. Dan
+Rowan's matched its story and was dropped by choice alongside it. The
+`WorkQuote` type and the card's quote rendering both remain, so a confirmed
+quote drops in without touching the component.
+
+**All three cards now link out.** Humble, Holonomy and Best Interlocks each
+have a live URL, so the `↗` renders on every card — previously on none.
+
+**The footer no longer publishes an address.** Every inbound routes through
+the form and the modal. The address stays in `content/site.ts` for the privacy
+policy, where a reachable contact is expected, and for JSON-LD.
+
+### What is still a marker
+
+Three service stills (`fill-ins.md` #25), by choice. They render as image
+sources, so nothing leaks into visible copy.
+
+### The one launch blocker
+
+`RESEND_API_KEY` and its sending domain and destination (#21–#23) are
+deferred. Until the key is set, `app/api/contact/route.ts` returns
+`{ ok: true, mocked: true }` and logs a warning — the form looks like it works
+and no mail is sent. This must be closed before the winning direction goes
+anywhere public.
+
+### Re-verified after the copy pass
+
+45/45 QA checks, clean lint, clean types, and a zero-warning production build
+on all three worktrees.
