@@ -31,11 +31,52 @@ then up, and the contact form. `/privacy-policy` is rewritten in all three.
 
 The page, the markup, the copy, the component tree, the container and spacing
 system, and the exit-bar results. Structure was built once on
-`task-a/shared-base` and forked. Each direction changes only the `:root` token
-block in `app/globals.css`, a per-direction section appended to that file,
-`app/fonts.ts`, and its two generated images.
+`task-a/shared-base` and forked. Each fork owns exactly **two source files** —
+`app/direction.css` and `app/fonts.ts` — plus its two generated images.
+`app/globals.css` and every component are byte-identical across the three
+worktrees (verified, not assumed).
 
 That is the point of the exercise: **you are comparing look, not layout.**
+
+## The craft pass (second run)
+
+The first pass shipped one flat ground from top to bottom, which is why it read
+as a styled document rather than a designed site. This pass took the structural
+lessons off the reference — not its theme — and rebuilt the atmosphere.
+
+- **Three grounds, not one.** Dark full-bleed hero → a band that dissolves dark
+  into paper → the paper body → a single dark block carrying Contact and the
+  footer together. The alternation is doing most of the work.
+- **A curtain raise.** The hero still dissolves up out of the ground rather than
+  snapping in. Skipped on a repeat navigation (a pre-paint flag in `layout.tsx`),
+  never run under reduced motion. A quiet scroll cue leaves on first scroll.
+- **The nav is an object.** Links sit in a frosted cluster with real inset light
+  modelling. Over the dark hero the same object becomes dark glass — done with a
+  data attribute rather than `mix-blend-mode`, so both states can be contrast
+  checked. It hides on an accumulator, so trackpad jitter cannot flicker it.
+- **Work cards carry the ramp.** Each card has a colour plate running the full
+  height of the card, descending the page, with its index and client name on it.
+  A system (`design-principles.md` §3 allows exactly this), not decoration — and
+  it invents no imagery we do not have.
+- **The contact form is a real form.** Rounded fields, a focus ring, our own
+  select chevron instead of OS chrome, and a pill submit that fills and lifts.
+- **A contact modal**, sharing the same fields, opened from the ethos CTA and the
+  footer pill. Escape and the overlay close it, focus is trapped and restored to
+  whatever opened it, the page behind is locked, and it is `inert` when closed.
+- **The footer lands.** The wordmark set to fill the column, sliding up from its
+  own baseline as it enters, over two pills and a quiet legal row.
+
+**A real bug fell out of this.** Our layout class was named `.container`, which
+collides with Tailwind's `container` core utility. Every section on every variant
+was silently pinned to 1280px, which is why the page read narrow with a dead
+right-hand column. Renamed to `.shell`.
+
+### What was deliberately not taken from the reference
+
+Their ocean/underwater theme and imagery, their palette, their wordmark and type,
+their copy and section names, their accordion Work list, and their 9.56 MB footer
+video. `docs/brief.md` rules all of those out, and none of them are what made the
+page work.
 
 ## The three
 
@@ -62,6 +103,11 @@ That is the point of the exercise: **you are comparing look, not layout.**
   never on text — it cannot clear 4.5:1 on white.
 - **Type** IBM Plex Sans 400 doing display *and* body, with its own mono cut
   for small text. One family, total.
+- **Ground alternation** the dark is pure black, and the ramp is signal
+  strength rather than hue: the plates darken down the page while the scanline
+  over them tightens. Green stays budgeted to its two moments.
+- **Corners** nothing rounds, anywhere — not the nav cluster, not the pills, not
+  the modal. The moment a corner eases it stops being B.
 - **Ornament** brackets, `[ Work ]`, and no graphic at all.
 - **Hero** our own work abstracted to bars and one green block, under a hard
   scanline — standing in for the screen recording the direction calls for.
@@ -79,6 +125,9 @@ That is the point of the exercise: **you are comparing look, not layout.**
 - **Type** Instrument Serif for display, Inter for body, JetBrains Mono for
   metadata. Instrument Serif ships one weight, which keeps the one-weight
   rule honest by construction.
+- **Ground alternation** the dark is a deep ink night, and C is the one
+  direction where the ramp is literally a colour ramp: the blue descends from
+  surface to depth across the three cards, each plate lit from above.
 - **Ornament** the eyebrow label in a hairline pill.
 - **Hero** weighted slabs throwing real shadows.
 - **Motion** media scales `1.04 → 1.0` on entry; card shadows deepen on hover.
@@ -93,15 +142,16 @@ That is the point of the exercise: **you are comparing look, not layout.**
 | `npm run lint` | clean | clean | clean |
 | `npx tsc --noEmit` | clean | clean | clean |
 | `npm run build` | clean, 0 warnings | clean, 0 warnings | clean, 0 warnings |
+| Contact modal: focus trap, inert, scroll lock, Esc + overlay | pass | pass | pass |
 | Browser pass 390 / 768 / 1280 / 1920, both routes | pass | pass | pass |
 | Console errors / failed requests / `og.png` 200 | pass | pass | pass |
 | `prefers-reduced-motion` | pass | pass | pass |
 | Tap equivalent for every hover | pass | pass | pass |
 | Copy — no invented facts, no leftovers | pass | pass | pass |
-| Lighthouse mobile, production build | **perf 99 / a11y 100** | **perf 98 / a11y 100** | **perf 99 / a11y 100** |
+| Lighthouse mobile, production build | **perf 98 / a11y 100** | **perf 97 / a11y 100** | **perf 98 / a11y 100** |
 | Contact validation + honeypot + rate limit | pass (Resend mocked) | pass (Resend mocked) | pass (Resend mocked) |
 
-35 automated checks per variant, all green. `scripts/qa.mjs <url>` re-runs
+45 automated checks per variant, all green. `scripts/qa.mjs <url>` re-runs
 them; **restart the server first**, because the rate limit is in-memory with
 a one-hour window and a previous run will otherwise poison the next one.
 
