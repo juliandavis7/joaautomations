@@ -2,6 +2,10 @@ import type { Metadata, Viewport } from 'next'
 import { fontClassName } from './fonts'
 import { site } from '@/content/site'
 import './globals.css'
+/* The direction layer. Loaded after the shared sheet so a fork's tokens
+   win, and kept in its own file so the three worktrees never collide on
+   globals.css when the shared base moves. */
+import './direction.css'
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

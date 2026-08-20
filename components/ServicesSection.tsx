@@ -31,7 +31,7 @@ export default function ServicesSection() {
   }
 
   return (
-    <section id="services" className="container section" aria-label="Services">
+    <section id="services" className="shell section" aria-label="Services">
       <div className="max-w-ct mx-auto">
         <Eyebrow>Services</Eyebrow>
 

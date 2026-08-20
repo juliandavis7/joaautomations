@@ -1,0 +1,134 @@
+/* ============================================================
+   DIRECTION LAYER — this file is the whole fork surface.
+   app/globals.css is byte-identical across the three worktrees;
+   only this file and app/fonts.ts differ.
+   ============================================================ */
+:root {
+  /* Direction C — "Long shadow".
+     Near-white ground, deep ink blue, and a soft large real shadow as the
+     signature: cards and media get physical weight on the page. The known
+     risk is that a display serif is a strong flavour and will date faster
+     than A or B. */
+  --paper: #F7F7F5;
+  --ink: #141414;
+  --accent: #1B2ECC;
+  --accent-ink: #1B2ECC;      /* 8.6:1 on the paper — safe on text as well as rules */
+
+  --dark: #0A0C1E;
+  --dark-2: #141833;
+  --on-dark: #F2F2EF;
+  --on-dark-muted: rgba(242, 242, 239, 0.62);
+  --on-dark-line: rgba(242, 242, 239, 0.2);
+
+  /* The one direction where the ramp is literally a colour ramp: the blue
+     descends from surface to depth as you read down the three cards. White
+     type clears 7:1 on every step. */
+  --ramp-1: #2E3FD8;
+  --ramp-2: #1B2ECC;
+  --ramp-3: #0E1A7A;
+
+  /* Cards are objects here, not regions of the ground. */
+  --card-bg: #FFFFFF;
+  --card-pad: clamp(24px, 3.4vw, 48px);
+
+  /* Instrument Serif display, Inter body, JetBrains Mono metadata.
+     Registered in app/fonts.ts. */
+  --font-display: var(--font-face-display), ui-serif, Georgia, serif;
+  --font-body: var(--font-face-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --hero-poster: url('/hero-poster.jpg');
+
+  /* The signature element. Large, soft and low-opacity — a real shadow, not
+     a glow and not a coloured drop shadow. */
+  --media-shadow: 0 48px 90px -34px rgba(20, 20, 20, 0.26),
+    0 10px 24px -14px rgba(20, 20, 20, 0.13);
+  --media-shadow-deep: 0 70px 120px -36px rgba(20, 20, 20, 0.36),
+    0 16px 34px -16px rgba(20, 20, 20, 0.19);
+  --media-radius: 14px;
+
+  --radius-sm: 12px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* Light falls across the plate from above. */
+  --plate-texture: linear-gradient(160deg, rgba(255, 255, 255, 0.22), transparent 58%);
+  --plate-size: auto;
+
+  --band-texture: none;
+  --band-size: auto;
+
+  /* Instrument Serif's caps are narrower than a grotesque's, so the wordmark
+     needs a larger step to fill the same column. */
+  --wordmark-scale: 0.66;
+}
+
+/* ---------- direction C: weight, and a serif that has to earn it ---------- */
+
+/* Instrument Serif's own metrics run tight at display size, so it gets a
+   hair more room than the two sans directions. */
+.display {
+  line-height: 1.05;
+}
+
+/* The eyebrow label sits in a small pill with a hairline border. That pill
+   is the whole ornament — the rule the other directions draw is dropped. */
+.eyebrow__ornament {
+  display: none;
+}
+
+.eyebrow__label {
+  display: inline-block;
+  padding: 8px 16px 7px;
+  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  border-radius: var(--radius-pill);
+  line-height: 1;
+}
+
+/* Cards are objects on the ground, so they carry the shadow and a surface
+   rather than floating text on paper. */
+.work-card {
+  box-shadow: var(--media-shadow);
+}
+
+.work-card:hover {
+  box-shadow: var(--media-shadow-deep);
+}
+
+.work-card__quote {
+  border-left-color: var(--accent);
+}
+
+.services__peek {
+  box-shadow: var(--media-shadow-deep);
+}
+
+/* Media scales in rather than rising: 1.03 -> 1.0 as it enters. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity 700ms var(--ease), transform 900ms var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.work-card__link,
+.footer__email,
+.legal__body a {
+  border-bottom-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.legal__body a:hover {
+  border-bottom-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.form__submit {
+  color: var(--accent-ink);
+}
