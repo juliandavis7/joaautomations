@@ -9,6 +9,11 @@ export const site = {
   domain: 'joaautomations.com',
   url: 'https://joaautomations.com',
   tagline: 'JOA — two people who build websites',
+  /**
+   * Not surfaced in the footer — the page routes everything through the
+   * contact form (fill-ins Q&A, 2026-08-20). Still used by the privacy
+   * policy, where a reachable address is expected, and by JSON-LD.
+   */
   email: 'joaautomations@gmail.com',
 } as const
 
@@ -19,8 +24,9 @@ export const nav = [
 
 /** The page's one <h1>, sitting below the hero. */
 export const pitch = {
-  heading: '[FILL IN: pitch / <h1> wording — fill-ins.md #24]',
-  body: '[FILL IN: the two or three sentences under the pitch — fill-ins.md #24]',
+  heading: 'Websites built by hand, with the systems behind them',
+  body:
+    'Every site is designed by hand. When the business needs the site to work, not just look right, we build the systems that make it work.',
 } as const
 
 export const services = [
@@ -40,8 +46,8 @@ export const services = [
 
 export const ethos = {
   paragraphs: [
-    '[FILL IN: who we are — the two names, first person, no credentials — fill-ins.md #18]',
-    '[FILL IN: where we are based and why we do this, 2-3 sentences in your own words — fill-ins.md #19, #20]',
+    'Josh and Julian, two engineers in Santa Monica who got tired of watching good businesses buy websites nobody had really worked on.',
+    'So we build them properly. Designed by hand, with real systems behind them when the business needs it — booking, email, and the rest. A site that looks handmade earns more trust, and trust is what converts.',
   ],
 } as const
 
