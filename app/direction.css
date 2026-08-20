@@ -121,7 +121,6 @@ body {
   .services__word::before { transition: none; }
 }
 
-.footer__email:hover,
 .legal__body a:hover {
   border-bottom-color: var(--accent);
   color: var(--accent-ink);
