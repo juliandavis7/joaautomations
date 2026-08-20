@@ -40,9 +40,8 @@ export default function Footer() {
     <footer className="shell footer">
       <div className="max-w-ct mx-auto">
         <div className="footer__pills">
-          <a className="pill" href={`mailto:${site.email}`}>
-            {site.email}
-          </a>
+          {/* The address is deliberately not published here — every inbound
+              goes through the form (fill-ins Q&A, 2026-08-20). */}
           <button className="pill" type="button" onClick={openContactModal}>
             Start a project
             <span className="arrow ml-2" aria-hidden="true">

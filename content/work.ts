@@ -2,8 +2,14 @@
  * The three Work cards. Case studies and testimonials in one section.
  *
  * Rules (docs/brief.md): no invented outcomes, quotes, figures, or
- * timelines. Quotes here are verbatim from the previous site and are the
- * only two we have. Everything unknown is a literal [FILL IN: …].
+ * timelines. Facts here were confirmed in the fill-ins Q&A (2026-08-20).
+ *
+ * Both testimonials were deliberately dropped in that pass:
+ *  - Karl Watson's described an AI phone receptionist, which is not what was
+ *    built for Humble (website + Google Calendar booking). Keeping it would
+ *    have claimed a product that never shipped.
+ *  - Dan Rowan's matched its story but was dropped alongside it.
+ * The WorkQuote type stays so a real, confirmed quote can be added later.
  */
 
 export type WorkQuote = {
@@ -31,49 +37,39 @@ export type WorkCardData = {
 
 export const work: WorkCardData[] = [
   {
-    headline: '[FILL IN: outcome headline — fill-ins.md #1]',
+    headline: 'Every booking lands in the calendar he already had open.',
     client: 'Humble Bike Rentals',
     story:
-      'We designed and built the site on Next.js. Booking is backed by Google Calendar, so a rental lands on the calendar the owner already checks. Resend handles the confirmation and the reminder.',
-    quote: {
-      text: "I was missing calls every summer weekend. Tourists would hit voicemail and rent from the shop down the boardwalk. Now the AI receptionist answers every call and books rentals straight into my calendar. Weekend revenue is up and I'm not the bottleneck anymore.",
-      name: 'Karl Watson',
-      title: 'Owner, Humble Bike Rentals',
-    },
+      'A custom build, designed by hand, with Google Calendar and email wired in behind it. A rental books straight onto the calendar the owner was already using, and the confirmation and reminder go out on their own.',
     meta: {
-      services: '[FILL IN: services line — fill-ins.md #4]',
-      industry: '[FILL IN: industry — fill-ins.md #5]',
-      location: '[FILL IN: city, state — fill-ins.md #2]',
+      services: 'Website + Booking + SEO/GEO',
+      industry: 'Bike Rentals',
+      location: 'Santa Monica, CA',
     },
-    href: null,
+    href: 'https://www.humblebikerentals.com',
   },
   {
-    headline: '[FILL IN: outcome headline — fill-ins.md #7]',
+    headline: 'The AI work finally had somewhere to live.',
     client: 'Holonomy Consulting',
     story:
-      'A custom site build, with Resend wired into the contact flow so an inquiry arrives as real email rather than sitting in a form dashboard nobody opens. [FILL IN: two sentences of plain context on what Holonomy actually does — fill-ins.md #12]',
+      'Holonomy helps K-12 school systems navigate AI — strategy and policy through instructional integration and back-office operations — for district and school leaders. They had a site for the core consulting practice but nothing representing the AI Schools work, a second and growing line with no real home. The rebuild brought both under one site with clear separation between them, so a visitor lands in the right place and understands what Holonomy actually offers.',
     meta: {
-      services: '[FILL IN: services line — fill-ins.md #10]',
-      industry: '[FILL IN: industry — fill-ins.md #11]',
-      location: '[FILL IN: city, state — fill-ins.md #8]',
+      services: 'Website + SEO/GEO',
+      industry: 'Education Consulting (K-12)',
+      location: 'Alhambra, CA',
     },
-    href: null,
+    href: 'https://www.holonomyconsulting.com/',
   },
   {
-    headline: '[FILL IN: outcome headline about the workflow — fill-ins.md #13]',
+    headline: 'Nothing gets retyped anymore.',
     client: 'Best Interlocks of California',
     story:
-      'This one is automation, not a website. A signed lease now moves through the CRM, the installer sheet, the welcome packet, and the payment links on its own, instead of being retyped four times by hand.',
-    quote: {
-      text: 'Before this was in place, every signed lease meant 20 minutes of busywork. Updating the CRM, refreshing the installer sheet, sending the welcome packet and payment links, all by hand. Now the second a lease gets signed, all of that fires off on its own. We get hours back every week.',
-      name: 'Dan Rowan',
-      title: 'Owner, Best Interlocks of California',
-    },
+      'This one is automation, not a website. A signed lease now saves to the CRM, triggers the welcome packet, and sends the payment links automatically, instead of being handled by hand at every step.',
     meta: {
-      services: '[FILL IN: services line — fill-ins.md #16]',
-      industry: '[FILL IN: industry — fill-ins.md #17]',
-      location: '[FILL IN: city, state — fill-ins.md #14]',
+      services: 'SMB Automation + CRM',
+      industry: 'Ignition Interlock Services',
+      location: 'Santa Monica, CA',
     },
-    href: null,
+    href: 'https://bestinterlocksofcalifornia.com/',
   },
 ]
