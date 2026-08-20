@@ -249,11 +249,14 @@ button:focus-visible > .arrow {
   content: '';
   position: absolute;
   inset: 0;
-  opacity: 0.5;
+  opacity: 0.55;
   background-image: var(--band-texture, none);
   background-size: var(--band-size, auto);
-  background-repeat: repeat-x;
-  background-position: bottom;
+  background-repeat: repeat;
+  /* The texture dissolves in and back out across the join rather than
+     sitting as a stripe along the bottom edge. */
+  mask-image: linear-gradient(to bottom, transparent 4%, #000 46%, transparent 96%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 4%, #000 46%, transparent 96%);
 }
 
 /* Scroll cue, bottom of the hero. Quiet, and it leaves on first scroll. */

@@ -1,5 +1,5 @@
 /* ============================================================
-   DIRECTION TOKENS — the only block a worktree fork rewrites.
+   DIRECTION LAYER — this file is the whole fork surface.
    Everything below the SHARED STRUCTURE banner is identical in
    all three directions.
 
