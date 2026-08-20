@@ -107,13 +107,80 @@ Do not paste secrets in this file or in chat.
 
 ---
 
+## Answered — Q&A of 2026-08-20
+
+Every item below is now real copy in `content/`. Nothing here was drafted for the
+user; each is their words, tightened only for rhythm.
+
+### Work cards
+
+| # | Item | Answer |
+| --- | --- | --- |
+| 1 | Humble headline | "Every booking lands in the calendar he already had open." |
+| 2 | Humble location | Santa Monica, CA |
+| 3 | Humble URL | `https://www.humblebikerentals.com` |
+| 4 | Humble services | `Website + Booking + SEO/GEO` |
+| 5 | Humble industry | `Bike Rentals` |
+| 6 | Karl Watson quote | **Dropped.** See "Both quotes dropped" below. |
+| 7 | Holonomy headline | "The AI work finally had somewhere to live." |
+| 8 | Holonomy location | Alhambra, CA |
+| 9 | Holonomy URL | `https://www.holonomyconsulting.com/` |
+| 10 | Holonomy services | `Website + SEO/GEO` |
+| 11 | Holonomy industry | `Education Consulting (K-12)` |
+| 12 | What Holonomy does | K-12 school systems navigating AI: strategy and policy through instructional integration and back-office operations, for district and school leaders. |
+| 13 | Interlocks headline | "Nothing gets retyped anymore." |
+| 14 | Interlocks location | Santa Monica, CA |
+| 15 | Interlocks URL | `https://bestinterlocksofcalifornia.com/` |
+| 16 | Interlocks services | `SMB Automation + CRM` |
+| 17 | Interlocks industry | `Ignition Interlock Services` |
+
+### Both quotes dropped
+
+**Karl Watson's** described an AI phone receptionist answering calls and booking
+rentals. What was actually built for Humble is a website with Google Calendar
+booking — no receptionist. Shipping the quote would have claimed a product that
+never existed, which is exactly what the brief forbids. Dropped.
+
+**Dan Rowan's** matched its story on all four beats and was dropped alongside it
+by choice, not by necessity. If it is ever wanted back it is recoverable verbatim
+from git history (`git show` an early revision of `content/work.ts`).
+
+The `WorkQuote` type and the card's quote rendering both stay in place, so a real
+confirmed quote drops in without a rebuild of the component.
+
+### Ethos, pitch, config
+
+| # | Item | Answer |
+| --- | --- | --- |
+| 18 | Names | Josh and Julian. First names only. |
+| 19 | Based | Santa Monica, stated plainly. |
+| 20 | Why | Tired of watching good businesses buy websites nobody had really worked on. Built by hand, with real systems behind them when the business needs it. A site that looks handmade earns more trust, and trust is what converts. |
+| 24 | Pitch `<h1>` | "Websites built by hand, with the systems behind them" |
+| 27 | Automation product name | None. The services line carries it. |
+
+**Explicitly excluded from the ethos section:** years-of-experience numbers,
+tech-stack names, logo wall, credentials. Naming an integration a client actually
+touches (Google Calendar, email) is still fine on a Work card — the exclusion is
+about how JOA describes itself, not about what was built.
+
+**Footer email removed.** Every inbound now routes through the contact form. The
+address survives in `content/site.ts` for the privacy policy, where a reachable
+contact is expected, and for JSON-LD.
+
+---
+
 ## Summary
 
-**Decided:** wordmark, domain, OG, services, three cards, Affluent out, Terms dropped,
-form fields, rate limit, hero split, quote placement.
+**Answered (2026-08-20):** #1–#20, #24, #27. Both testimonials dropped.
 
-**Still open:** card facts (#1–#17), ethos (#18–#20), Resend dest (#21–#23), pitch and
-media (#24–#27).
+**Still open:**
 
-The run starts without these. Every open item is a `[FILL IN]` in source, listed back
-at the end.
+| # | Item | Status |
+| --- | --- | --- |
+| 21 | `RESEND_API_KEY` | Deferred — **pre-launch blocker.** Until it is set the route mocks success. |
+| 22 | Verified sending domain | Deferred with #21. |
+| 23 | Destination address | Deferred with #21. |
+| 25 | Service stills | Ships as `[FILL IN]` markers by choice. Three of them. |
+| 26 | Direction C hero | Stays the generated abstract poster. |
+
+Nothing open blocks the bake-off. #21–#23 block a real launch.
