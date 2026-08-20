@@ -1,0 +1,50 @@
+/* ============================================================
+   DIRECTION LAYER — this file is the whole fork surface.
+   app/globals.css is byte-identical across the three worktrees;
+   only this file and app/fonts.ts differ.
+
+   The page runs three grounds, not one: a dark atmospheric hero,
+   a paper body, and a dark contact/footer block, with a band
+   dissolving between them. --paper/--ink drive the body; --dark
+   and its on-dark set drive the two dark blocks.
+   ============================================================ */
+:root {
+  --paper: #FAFAF8;
+  --ink: #111110;
+  --accent: #3A3A37;
+  --accent-ink: #3A3A37;
+
+  /* The dark ground: hero, contact, footer. */
+  --dark: #17171A;
+  --dark-2: #202024;          /* raised surfaces on the dark ground */
+  --on-dark: #F4F4F2;
+  --on-dark-muted: rgba(244, 244, 242, 0.62);
+  --on-dark-line: rgba(244, 244, 242, 0.18);
+
+  /* Work ramp — one colour per card, descending down the page. A system,
+     not decoration. Card 1 is nearest the surface. */
+  --ramp-1: #3A3A37;
+  --ramp-2: #2A2A28;
+  --ramp-3: #1B1B19;
+
+  --card-bg: transparent;
+  --card-pad: 0px;
+
+  --font-display: var(--font-face-display), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-face-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-face-mono), ui-monospace, SFMono-Regular, monospace;
+
+  --hero-poster: url('/hero-poster.jpg');
+
+  --media-shadow: none;
+  --media-radius: 0px;
+
+  /* Corner language. B stays square; A is nearly square; C rounds. */
+  /* "JOA" set to fill the column. Caps width varies by face, so each
+     direction tunes this: a grotesque needs ~0.46, a narrower serif more. */
+  --wordmark-scale: 0.55;
+
+  --radius-sm: 10px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+}
