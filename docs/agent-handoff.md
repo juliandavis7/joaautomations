@@ -11,10 +11,10 @@ then `migration-plan.md` §9.
 
 | Branch | Path | Port | State |
 | --- | --- | --- | --- |
-| `task-a/shared-base` | `/Users/juliandavis/dev/joaautomations` | 4100 (QA only) | Done, 35/35 |
-| `direction-a` | `/Users/juliandavis/dev/joaautomations-direction-a` | 3001 | **Done** — 35/35, LH 99/100 |
-| `direction-b` | `/Users/juliandavis/dev/joaautomations-direction-b` | 3002 | **Done** — 35/35, LH 98/100 |
-| `direction-c` | `/Users/juliandavis/dev/joaautomations-direction-c` | 3003 | **Done** — 35/35, LH 99/100 |
+| `task-a/shared-base` | `/Users/juliandavis/dev/joaautomations` | 4100 (QA only) | Done, 45/45 |
+| `direction-a` | `/Users/juliandavis/dev/joaautomations-direction-a` | 3001 | **Done** — 45/45, LH 98/100 |
+| `direction-b` | `/Users/juliandavis/dev/joaautomations-direction-b` | 3002 | **Done** — 45/45, LH 97/100 |
+| `direction-c` | `/Users/juliandavis/dev/joaautomations-direction-c` | 3003 | **Done** — 45/45, LH 98/100 |
 
 The run is complete. `docs/bake-off.md` is the deliverable write-up.
 
@@ -34,14 +34,21 @@ live in Tailwind theme tokens backed by CSS variables.
 Two plan-called-out defects fixed: the 87 dead `font-family: 'DM Sans'`
 declarations, and the 404ing `/og.png`.
 
-**A direction fork only ever changes:** the `:root` token block at the top of
-`app/globals.css` (plus a per-direction section appended at the bottom),
-`app/fonts.ts`, and the two generated images. Never a component.
+**A direction fork owns exactly two source files:** `app/direction.css` and
+`app/fonts.ts`, plus its two generated images. `app/globals.css` and every
+component are byte-identical across the three worktrees — check with
+`diff -rq components ../joaautomations-direction-X/components`. Never edit a
+component in a fork; put it on `task-a/shared-base` and merge.
+
+A second pass (the craft pass) rebuilt the page's atmosphere: three grounds
+with a dissolving band, a frosted nav cluster, ramp plates on the Work cards,
+a designed contact form, a contact modal, and a giant footer wordmark. See
+`docs/bake-off.md`.
 
 ## Tooling written for this run
 
-- `scripts/qa.mjs <baseUrl> [--shots dir]` — the §9 browser checks (35 of
-  them) driven over CDP with the platform WebSocket. No puppeteer.
+- `scripts/qa.mjs <baseUrl> [--shots dir]` — the §9 browser checks (45 of
+  them, including the modal's focus/inert/scroll-lock/close paths) driven over CDP with the platform WebSocket. No puppeteer.
   **Restart the server before each run** — the contact rate limit is
   in-memory with a 1h window and will otherwise poison the next run.
 - `scripts/make-assets.mjs` — renders `public/og.png` and
