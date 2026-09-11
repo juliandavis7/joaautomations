@@ -68,3 +68,6 @@ Desktop.ini
 
 # Direction worktrees live beside the repo, not inside it
 /worktrees/
+
+# Playwright MCP scratch output
+.playwright-mcp/

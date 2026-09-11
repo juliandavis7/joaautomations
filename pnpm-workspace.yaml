@@ -1,0 +1,7 @@
+allowBuilds:
+  unrs-resolver: set this to true or false
+# unrs-resolver ships a native binary used by eslint-config-next's import
+# resolver and needs its postinstall to run. pnpm 11 fails the install
+# unless the package is named here.
+onlyBuiltDependencies:
+  - unrs-resolver

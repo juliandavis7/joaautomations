@@ -1,35 +1,28 @@
 /**
- * The direction's two-or-three faces, registered through next/font and
- * exposed as CSS variables only. Components never name a family — they
- * use --font-display / --font-body / --font-mono via Tailwind tokens.
+ * The two faces, self-hosted through next/font/google.
  *
- * A direction fork rewrites this file and the token block in globals.css.
- * Nothing else.
+ * Portal specifies Perfectly Nineties Regular for display text. It is a
+ * licensed face and is not sourced here; Playfair Display is the first
+ * substitute Portal's own fallback list names, loaded at weight 400 —
+ * the only weight Portal uses it at.
  *
- * Shared base: Inter Tight for display and body, JetBrains Mono for the
- * small text. Neutral on purpose.
+ * Inter carries body, nav, links and labels at 400/500/600, per Portal.
+ * Both subset to latin with display: swap.
  */
-import { Inter_Tight, JetBrains_Mono } from 'next/font/google'
+import { Inter, Playfair_Display } from 'next/font/google'
 
-const display = Inter_Tight({
+export const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-face-inter',
+  display: 'swap',
+})
+
+export const display = Playfair_Display({
   subsets: ['latin'],
   weight: ['400'],
   variable: '--font-face-display',
   display: 'swap',
 })
 
-const body = Inter_Tight({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-face-body',
-  display: 'swap',
-})
-
-const mono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-face-mono',
-  display: 'swap',
-})
-
-export const fontClassName = `${display.variable} ${body.variable} ${mono.variable}`
+export const fontClassName = `${inter.variable} ${display.variable}`
